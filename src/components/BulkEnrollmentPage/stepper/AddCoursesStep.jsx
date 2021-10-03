@@ -5,9 +5,11 @@ import { InstantSearch, Configure } from 'react-instantsearch-dom';
 import { SearchData, SearchHeader } from '@edx/frontend-enterprise-catalog-search';
 
 import { configuration } from '../../../config';
-import { ADD_COURSES_TITLE, ADD_COURSE_DESCRIPTION } from './constants';
 
 import CourseSearchResults from '../CourseSearchResults';
+
+import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import messages from './BulkEnrollmentStepper.messages';
 
 const searchClient = algoliasearch(
   configuration.ALGOLIA.APP_ID,
@@ -15,11 +17,11 @@ const searchClient = algoliasearch(
 );
 
 const AddCoursesStep = ({
-  enterpriseId, enterpriseSlug, subscription,
+  enterpriseId, enterpriseSlug, subscription, intl
 }) => (
   <>
-    <p>{ADD_COURSE_DESCRIPTION}</p>
-    <h2>{ADD_COURSES_TITLE}</h2>
+    <p>{intl.formatMessage(messages['bulk.stepper.add-courses.description'])}</p>
+    <h2>{intl.formatMessage(messages['bulk.stepper.add-courses.title'])}</h2>
     <SearchData>
       <InstantSearch
         indexName={configuration.ALGOLIA.INDEX_NAME}
@@ -41,6 +43,7 @@ const AddCoursesStep = ({
 );
 
 AddCoursesStep.propTypes = {
+  intl: intlShape.isRequired,
   enterpriseId: PropTypes.string.isRequired,
   enterpriseSlug: PropTypes.string.isRequired,
   subscription: PropTypes.shape({
@@ -49,4 +52,4 @@ AddCoursesStep.propTypes = {
   }).isRequired,
 };
 
-export default AddCoursesStep;
+export default injectIntl(AddCoursesStep);

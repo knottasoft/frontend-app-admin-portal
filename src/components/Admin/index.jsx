@@ -24,6 +24,9 @@ import { formatTimestamp } from '../../utils';
 
 import AdminCardsSkeleton from './AdminCardsSkeleton';
 
+import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import messages from './Admin.messages.js';
+
 class Admin extends React.Component {
   componentDidMount() {
     const { enterpriseId } = this.props;
@@ -45,9 +48,9 @@ class Admin extends React.Component {
   }
 
   getMetadataForAction(actionSlug) {
-    const { enterpriseId } = this.props;
+    const { enterpriseId, intl } = this.props;
     const defaultData = {
-      title: 'Full Report',
+      title: intl.formatMessage(messages['admin.report.full.title']),
       component: <EnrollmentsTable />,
       csvFetchMethod: () => (
         EnterpriseDataApiService.fetchCourseEnrollments(enterpriseId, {}, { csv: true })
@@ -57,7 +60,7 @@ class Admin extends React.Component {
 
     const actionData = {
       'registered-unenrolled-learners': {
-        title: 'Registered Learners Not Yet Enrolled in a Course',
+        title: intl.formatMessage(messages['admin.report.unenrolled.title']),
         component: <RegisteredLearnersTable />,
         csvFetchMethod: () => (
           EnterpriseDataApiService.fetchUnenrolledRegisteredLearners(
@@ -69,7 +72,7 @@ class Admin extends React.Component {
         csvButtonId: 'registered-unenrolled-learners',
       },
       'enrolled-learners': {
-        title: 'Number of Courses Enrolled by Learners',
+        title: intl.formatMessage(messages['admin.report.enrolled.title']),
         component: <EnrolledLearnersTable />,
         csvFetchMethod: () => (
           EnterpriseDataApiService.fetchEnrolledLearners(enterpriseId, {}, { csv: true })
@@ -77,8 +80,8 @@ class Admin extends React.Component {
         csvButtonId: 'enrolled-learners',
       },
       'enrolled-learners-inactive-courses': {
-        title: 'Learners Not Enrolled in an Active Course',
-        description: 'Learners who have completed all of their courses and/or courses have ended.',
+        title: intl.formatMessage(messages['admin.report.enrolled.inactive.title']),
+        description: intl.formatMessage(messages['admin.report.enrolled.inactive.description']),
         component: <EnrolledLearnersForInactiveCoursesTable />,
         csvFetchMethod: () => (
           EnterpriseDataApiService.fetchEnrolledLearnersForInactiveCourses(
@@ -90,8 +93,8 @@ class Admin extends React.Component {
         csvButtonId: 'enrolled-learners-inactive-courses',
       },
       'learners-active-week': {
-        title: 'Learners Enrolled in a Course',
-        subtitle: 'Top Active Learners',
+        title: intl.formatMessage(messages['admin.report.enrolled.active-week.title']),
+        subtitle: intl.formatMessage(messages['admin.report.enrolled.active-week.subtitle']),
         component: <LearnerActivityTable id="learners-active-week" activity="active_past_week" />,
         csvFetchMethod: () => (
           EnterpriseDataApiService.fetchCourseEnrollments(
@@ -103,8 +106,8 @@ class Admin extends React.Component {
         csvButtonId: 'learners-active-week',
       },
       'learners-inactive-week': {
-        title: 'Learners Enrolled in a Course',
-        subtitle: 'Not Active in Past Week',
+        title: intl.formatMessage(messages['admin.report.enrolled.inactive-week.title']),
+        subtitle: intl.formatMessage(messages['admin.report.enrolled.inactive-week.subtitle']),
         component: <LearnerActivityTable id="learners-inactive-week" activity="inactive_past_week" />,
         csvFetchMethod: () => (
           EnterpriseDataApiService.fetchCourseEnrollments(
@@ -116,8 +119,8 @@ class Admin extends React.Component {
         csvButtonId: 'learners-inactive-week',
       },
       'learners-inactive-month': {
-        title: 'Learners Enrolled in a Course',
-        subtitle: 'Not Active in Past Month',
+        title: intl.formatMessage(messages['admin.report.enrolled.inactive-month.title']),
+        subtitle: intl.formatMessage(messages['admin.report.enrolled.inactive-month.subtitle']),
         component: <LearnerActivityTable id="learners-inactive-month" activity="inactive_past_month" />,
         csvFetchMethod: () => (
           EnterpriseDataApiService.fetchCourseEnrollments(
@@ -129,7 +132,7 @@ class Admin extends React.Component {
         csvButtonId: 'learners-inactive-month',
       },
       'completed-learners': {
-        title: 'Number of Courses Completed by Learner',
+        title: intl.formatMessage(messages['admin.report.enrolled.completed.title']),
         component: <CompletedLearnersTable />,
         csvFetchMethod: () => (
           EnterpriseDataApiService.fetchCompletedLearners(enterpriseId, {}, { csv: true })
@@ -137,8 +140,8 @@ class Admin extends React.Component {
         csvButtonId: 'completed-learners',
       },
       'completed-learners-week': {
-        title: 'Number of Courses Completed by Learner',
-        subtitle: 'Past Week',
+        title: intl.formatMessage(messages['admin.report.enrolled.completed-week.title']),
+        subtitle: intl.formatMessage(messages['admin.report.enrolled.completed-week.subtitle']),
         component: <PastWeekPassedLearnersTable />,
         csvFetchMethod: () => (
           EnterpriseDataApiService.fetchCourseEnrollments(
@@ -203,7 +206,7 @@ class Admin extends React.Component {
   }
 
   renderDownloadButton() {
-    const { match } = this.props;
+    const { match, intl } = this.props;
     const { params: { actionSlug } } = match;
     const tableMetadata = this.getMetadataForAction(actionSlug);
     return (
@@ -211,13 +214,16 @@ class Admin extends React.Component {
         id={tableMetadata.csvButtonId}
         fetchMethod={tableMetadata.csvFetchMethod}
         disabled={this.isTableDataMissing(actionSlug)}
-        buttonLabel={`Download ${actionSlug ? 'current' : 'full'} report (CSV)`}
+        buttonLabel={
+          intl.formatMessage(messages['admin.report.button.download'],
+            { actionSlug: actionSlug ? 'текущий' : 'полный' })
+        }
       />
     );
   }
 
   renderUrlResetButton() {
-    const { match: { url } } = this.props;
+    const { match: { url }, intl } = this.props;
 
     // Remove the slug from the url so it renders the full report
     const path = url.split('/').slice(0, -1).join('/');
@@ -225,13 +231,14 @@ class Admin extends React.Component {
     return (
       <Link to={path} className="btn btn-sm btn-outline-primary ml-0 ml-md-3 mr-3">
         <Icon className="fa fa-undo mr-2" />
-        Reset to {this.getMetadataForAction().title}
+        { intl.formatMessage(messages['admin.report.button.reset.report'],
+          { actionSlug: this.getMetadataForAction().title }) }
       </Link>
     );
   }
 
   renderFiltersResetButton() {
-    const { location: { search, pathname } } = this.props;
+    const { location: { search, pathname }, intl } = this.props;
     // remove the querys from the path
     const queryParams = qs.parse(search);
     ['search', 'search_course', 'search_start_date'].forEach((searchTerm) => {
@@ -242,7 +249,7 @@ class Admin extends React.Component {
     return (
       <Link id="reset-filters" to={resetLink} className="btn btn-sm btn-outline-primary">
         <Icon className="fa fa-undo mr-2" />
-        Reset Filters
+        {intl.formatMessage(messages['admin.report.button.reset.filters'])}
       </Link>
     );
   }
@@ -252,8 +259,11 @@ class Admin extends React.Component {
       <StatusAlert
         alertType="danger"
         iconClassName="fa fa-times-circle"
-        title="Unable to load overview"
-        message={`Try refreshing your screen (${this.props.error.message})`}
+        title={this.props.intl.formatMessage(messages['admin.report.message.error.title'])}
+        message={
+          this.props.intl.formatMessage(messages['admin.report.message.error.message'],
+            {message: this.props.error.message})
+        }
       />
     );
   }
@@ -264,14 +274,18 @@ class Admin extends React.Component {
         className="mt-3"
         alertType="danger"
         iconClassName="fa fa-times-circle"
-        title="Unable to Generate CSV Report"
-        message={`Please try again. (${message})`}
+        title={this.props.intl.formatMessage(messages['admin.report.message.csv.error.title'])}
+        message={
+          this.props.intl.formatMessage(messages['admin.report.message.csv.error.message'],
+            {message: message})
+        }
       />
     );
   }
 
   render() {
     const {
+      intl,
       error,
       lastUpdatedDate,
       loading,
@@ -295,12 +309,12 @@ class Admin extends React.Component {
       <main role="main" className="learner-progress-report">
         {!loading && !error && !this.hasAnalyticsData() ? <EnterpriseAppSkeleton /> : (
           <>
-            <Helmet title="Learner Progress Report" />
-            <Hero title="Learner Progress Report" />
+            <Helmet title={intl.formatMessage(messages['admin.helmet'])} />
+            <Hero title={intl.formatMessage(messages['admin.title'])} />
             <div className="container-fluid">
               <div className="row mt-4">
                 <div className="col">
-                  <h2>Overview</h2>
+                  <h2>{intl.formatMessage(messages['admin.overview.title'])}</h2>
                 </div>
               </div>
               <div className="row mt-3">
@@ -341,7 +355,9 @@ class Admin extends React.Component {
                           {lastUpdatedDate
                             && (
                             <>
-                              Showing data as of {formatTimestamp({ timestamp: lastUpdatedDate })}
+                              {intl.formatMessage(messages['admin.message.last-update.message'],
+                                  { lastUpdatedDate: formatTimestamp({ timestamp: lastUpdatedDate }) }
+                                )}
                             </>
                             )}
 
@@ -390,6 +406,7 @@ Admin.defaultProps = {
 };
 
 Admin.propTypes = {
+  intl: intlShape.isRequired,
   fetchDashboardAnalytics: PropTypes.func.isRequired,
   clearDashboardAnalytics: PropTypes.func.isRequired,
   enterpriseId: PropTypes.string,
@@ -418,4 +435,4 @@ Admin.propTypes = {
   table: PropTypes.shape({}),
 };
 
-export default Admin;
+export default injectIntl(Admin);

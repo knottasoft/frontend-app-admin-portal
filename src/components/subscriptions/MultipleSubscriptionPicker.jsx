@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -16,7 +17,7 @@ const MultipleSubscriptionsPicker = ({
   <>
     <Row>
       <Col>
-        <h2>Cohorts</h2>
+        <h2>Когорты</h2>
         <p className="lead">
           {leadText}
         </p>

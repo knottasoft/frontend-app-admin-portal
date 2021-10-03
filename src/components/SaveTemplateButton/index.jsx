@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StatefulButton, Icon } from '@edx/paragon';
@@ -43,7 +44,7 @@ class SaveTemplateButton extends React.Component {
 
     /* eslint-disable no-underscore-dangle */
     if (!formData[emailTemplateNameKey]) {
-      const message = 'No template name provided. Please enter a template name.';
+      const message = 'Имя шаблона не указано. Пожалуйста, введите имя шаблона.';
       errors[emailTemplateNameKey] = message;
       errors._error.unshift(message);
     }
@@ -138,9 +139,9 @@ class SaveTemplateButton extends React.Component {
         onClick={handleSubmit(this.handleSaveTemplate)}
         state={submitState}
         labels={{
-          default: 'Save Template',
-          pending: 'Saving Template...',
-          complete: 'Template Saved',
+          default: 'Сохранить шаблон',
+          pending: 'Сохранение шаблона...',
+          complete: 'Шаблон сохранен',
         }}
         icons={{
           pending: <Icon className="fa fa-spinner fa-spin" />,

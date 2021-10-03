@@ -4,8 +4,8 @@ import { EMAIL_TEMPLATE_FIELDS } from '../EmailTemplateForm';
 import CheckboxWithTooltip from '../ReduxFormCheckbox/CheckboxWithTooltip';
 
 export const ASSIGNMENT_ERROR_TITLES = {
-  [MODAL_TYPES.assign]: 'Unable to assign codes',
-  [MODAL_TYPES.save]: 'Unable to save template',
+  [MODAL_TYPES.assign]: 'Невозможно присвоить коды',
+  [MODAL_TYPES.save]: 'Не удается сохранить шаблон',
 };
 export const EMAIL_TEMPLATE_NUDGE_EMAIL_ID = 'enable-nudge-emails';
 
@@ -17,9 +17,9 @@ export const ASSIGNMENT_MODAL_FIELDS = {
     component: CheckboxWithTooltip,
     className: 'auto-reminder-wrapper',
     icon: faInfoCircle,
-    altText: 'More information',
-    tooltipText: 'edX will remind learners to redeem their code 3, 10, and 19 days after you assign it.',
-    label: 'Automate reminders',
+    altText: 'Дополнительная информация',
+    tooltipText: 'Платформа напомнит учащимся о необходимости погасить код через 3, 10 и 19 дней после его присвоения.',
+    label: 'Автоматизировать напоминания',
     defaultChecked: true,
   },
 };

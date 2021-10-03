@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -87,7 +88,7 @@ class FileInput extends React.Component {
           )}
         >
           <span className="file-name d-inline-block text-truncate">
-            {fileName || 'No File Chosen'}
+            {fileName || 'Файл не выбран'}
           </span>
           {!fileName ? (
             <>
@@ -105,7 +106,7 @@ class FileInput extends React.Component {
                 )}
                 htmlFor={id}
               >
-                Choose a file
+                Выберите файл
               </label>
               <input
                 ref={this.fileInputRef}
@@ -139,7 +140,7 @@ class FileInput extends React.Component {
               >
                 <>
                   <Icon className="fa fa-times mr-1" />
-                  Remove
+                  Удалить
                 </>
               </Button>
             </>

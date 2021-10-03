@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
@@ -6,7 +7,7 @@ const tableRowCount = 10;
 
 const SubscriptionDetailsSkeleton = (props) => (
   <div {...props}>
-    <div className="sr-only">Loading...</div>
+    <div className="sr-only">Загрузка...</div>
     <Skeleton height={175} />
     <Skeleton height={175} />
     <div className="d-md-flex">

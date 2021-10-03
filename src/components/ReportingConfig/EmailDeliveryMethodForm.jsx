@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Input, ValidationFormGroup } from '@edx/paragon';
@@ -12,11 +13,11 @@ const EmailDeliveryMethodForm = ({ invalidFields, config, handleBlur }) => {
       <div className="col">
         <ValidationFormGroup
           for="email"
-          helpText="The email(s), one per line, where the report should be sent"
-          invalidMessage="Required. One email per line. Emails must be formatted properly (email@domain.com)"
+          helpText="Электронная почта (адреса), по одному в строке, куда следует отправить отчет"
+          invalidMessage="Требуется. Одна электронная почта на строку. Электронные адреса должны быть правильно отформатированы (email@domain.com)."
           invalid={invalidFields.emailRaw}
         >
-          <label htmlFor="email">Email(s)</label>
+          <label htmlFor="email">Электронная почта(ы)</label>
           <Input
             type="textarea"
             id="email"
@@ -32,7 +33,7 @@ const EmailDeliveryMethodForm = ({ invalidFields, config, handleBlur }) => {
         </ValidationFormGroup>
         {config && (
           <div className="form-group">
-            <label htmlFor="changePassword">Change Password</label>
+            <label htmlFor="changePassword">Изменить пароль</label>
             <Input
               type="checkbox"
               id="changePassword"
@@ -44,11 +45,11 @@ const EmailDeliveryMethodForm = ({ invalidFields, config, handleBlur }) => {
         )}
         <ValidationFormGroup
           for="encryptedPassword"
-          helpText="This password will be used to secure the zip file. It will be encrypted when stored in the database."
+          helpText="Этот пароль будет использоваться для защиты zip-файла. Он будет зашифрован при сохранении в базе данных."
           invalid={invalidFields.encryptedPassword}
-          invalidMessage="Required. Password must not be blank"
+          invalidMessage="Требуется. Пароль не должен быть пустым"
         >
-          <label htmlFor="encryptedPassword">Password</label>
+          <label htmlFor="encryptedPassword">Пароль</label>
           <Input
             type="password"
             id="encryptedPassword"

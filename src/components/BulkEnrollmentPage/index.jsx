@@ -6,13 +6,16 @@ import { Container } from '@edx/paragon';
 import { Switch, Route } from 'react-router-dom';
 import Hero from '../Hero';
 import { MultipleSubscriptionsPage, SubscriptionData } from '../subscriptions';
-import CourseSearch from './CourseSearch';
+import CourseSearch, { BaseCourseSearch } from './CourseSearch';
 import { ROUTE_NAMES } from '../EnterpriseApp/constants';
 
-function BulkEnrollmentPage({ enterpriseId }) {
+import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import messages from './BulkEnrollment.messages';
+
+function BulkEnrollmentPage({ enterpriseId, intl }) {
   return (
     <div className="container-fluid bulk-enrollment">
-      <Hero title="Subscription Enrollment" />
+      <Hero title={intl.formatMessage(messages['bulk.course-search.hero.title'])} />
       <SubscriptionData enterpriseId={enterpriseId}>
         <main role="main" className="manage-subscription">
           <Switch>
@@ -24,8 +27,8 @@ function BulkEnrollmentPage({ enterpriseId }) {
                     {...routeProps}
                     redirectPage={ROUTE_NAMES.bulkEnrollment}
                     useCatalog
-                    leadText="Choose a subscription to enroll your learners in courses"
-                    buttonText="Enroll learners"
+                    leadText={intl.formatMessage(messages['bulk.course-search.multi.leadText'])}
+                    buttonText={intl.formatMessage(messages['bulk.course-search.multi.buttonText'])}
                   />
                 </Container>
               )}
@@ -44,6 +47,7 @@ function BulkEnrollmentPage({ enterpriseId }) {
 }
 
 BulkEnrollmentPage.propTypes = {
+  intl: intlShape.isRequired,
   enterpriseId: PropTypes.string.isRequired,
 };
 
@@ -51,4 +55,4 @@ const mapStateToProps = state => ({
   enterpriseId: state.portalConfiguration.enterpriseId,
 });
 
-export default connect(mapStateToProps)(BulkEnrollmentPage);
+export default connect(mapStateToProps)(injectIntl(BulkEnrollmentPage));

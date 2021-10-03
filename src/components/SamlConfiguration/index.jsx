@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ValidationFormGroup, Input } from '@edx/paragon';
@@ -29,7 +30,7 @@ class SamlConfiguration extends React.Component {
   getConfigOptions() {
     const { configs } = this.state;
     const options = [];
-    options.push({ label: '-- choose a configuration --', value: '', hidden: true });
+    options.push({ label: '-- выбрать конфигурацию --', value: '', hidden: true });
     configs.forEach((object) => {
       options.push({ label: object.slug, value: object.id });
     });
@@ -41,9 +42,9 @@ class SamlConfiguration extends React.Component {
       <div className="col col-4">
         <ValidationFormGroup
           for="samlConfigId"
-          helpText="the edX certificates to use with your SAML provider."
+          helpText="сертификаты для использования с провайдером SAML."
         >
-          <label htmlFor="samlConfigId">Saml Configuration</label>
+          <label htmlFor="samlConfigId">Конфигурация Saml</label>
 
           <Input
             type="select"

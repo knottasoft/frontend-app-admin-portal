@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -12,18 +13,18 @@ export default function LicenseStatus({ user }) {
         case ACTIVATED:
           return {
             iconClassName: 'fa-check-circle text-success',
-            text: 'Activated',
+            text: 'Активированный',
           };
         case ASSIGNED:
           return {
             iconClassName: 'fa-hourglass-half text-muted',
             text: (
               <>
-                <span>Pending</span>
+                <span>В ожидании</span>
                 {
                   user.lastRemindDate && (
                     <span className="d-block text-muted">
-                      Since { formatTimestamp({ timestamp: user.lastRemindDate })}
+                      С { formatTimestamp({ timestamp: user.lastRemindDate })}
                     </span>
                   )
                 }
@@ -33,7 +34,7 @@ export default function LicenseStatus({ user }) {
         case REVOKED:
           return {
             iconClassName: 'fa-times-circle text-danger',
-            text: 'Revoked',
+            text: 'Отозвано',
           };
         default:
           return {

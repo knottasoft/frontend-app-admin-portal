@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
@@ -33,8 +34,8 @@ class RequestCodesForm extends React.Component {
         className="mt-3"
         alertType="danger"
         iconClassName="fa fa-times-circle"
-        title="Unable to request more codes"
-        message={`Try refreshing your screen (${message})`}
+        title="Не удается запросить дополнительные коды"
+        message={`Попробуйте обновить экран (${message})`}
       />
     );
   }
@@ -73,7 +74,7 @@ class RequestCodesForm extends React.Component {
                 component={RenderField}
                 label={(
                   <>
-                    Email Address
+                    Адрес эл. почты
                     <span className="required">*</span>
                   </>
                 )}
@@ -88,7 +89,7 @@ class RequestCodesForm extends React.Component {
                 component={RenderField}
                 label={(
                   <>
-                    Company
+                    Компания
                     <span className="required">*</span>
                   </>
                 )}
@@ -102,7 +103,7 @@ class RequestCodesForm extends React.Component {
                 className="numberOfCodes"
                 type="number"
                 component={RenderField}
-                label="Number of Codes"
+                label="Количество кодов"
                 validate={[isValidNumber]}
                 data-hj-suppress
               />
@@ -111,7 +112,7 @@ class RequestCodesForm extends React.Component {
                 className="notes"
                 type="text"
                 component={RenderField}
-                label="Notes"
+                label="Комментарии"
                 validate={[maxLength512]}
                 data-hj-suppress
               />
@@ -122,14 +123,14 @@ class RequestCodesForm extends React.Component {
               >
                 <>
                   {submitting && <Icon className="fa fa-spinner fa-spin mr-2" />}
-                  Request Codes
+                  Запросить коды
                 </>
               </Button>
               <Link
                 className="btn btn-link ml-3 form-cancel-btn"
                 to={this.getPathToCodeManagement()}
               >
-                Cancel
+                Отменить
               </Link>
             </form>
           </div>

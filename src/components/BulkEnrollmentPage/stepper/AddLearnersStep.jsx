@@ -12,7 +12,6 @@ import { logError } from '@edx/frontend-platform/logging';
 
 import { Link } from 'react-router-dom';
 import { BulkEnrollContext } from '../BulkEnrollmentContext';
-import { ADD_LEARNERS_TITLE, ADD_LEARNERS_DESCRIPTION } from './constants';
 import TableLoadingSkeleton from '../../TableComponent/TableLoadingSkeleton';
 import { BaseSelectWithContext, BaseSelectWithContextHeader } from '../table/BulkEnrollSelect';
 import BaseSelectionStatus from '../table/BaseSelectionStatus';
@@ -20,12 +19,15 @@ import { ROUTE_NAMES } from '../../EnterpriseApp/constants';
 import LicenseManagerApiService from '../../../data/services/LicenseManagerAPIService';
 import { DEBOUNCE_TIME_MILLIS } from '../../../algoliaUtils';
 
-export const ADD_LEARNERS_ERROR_TEXT = 'There was an error retrieving email data. Please try again later.';
+import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import messages from './BulkEnrollmentStepper.messages';
+
+export const ADD_LEARNERS_ERROR_TEXT = 'Произошла ошибка при получении данных электронной почты. Пожалуйста, повторите попытку позже.';
 export const TABLE_HEADERS = {
-  email: 'Email',
+  email: 'Электронная почта',
 };
 
-export const LINK_TEXT = 'Subscription management';
+export const LINK_TEXT = 'Управление подпиской';
 
 const AddLearnersSelectionStatus = (props) => {
   const { emails: [selectedEmails, dispatch] } = useContext(BulkEnrollContext);
@@ -44,15 +46,6 @@ const selectColumn = {
   disableSortBy: true,
 };
 
-const tableColumns = [
-  selectColumn,
-  {
-    Header: TABLE_HEADERS.email,
-    accessor: 'userEmail',
-    Filter: TextFilter,
-  },
-];
-
 const INITIAL_PAGE_INDEX = 0;
 export const LEARNERS_PAGE_SIZE = 25;
 
@@ -63,9 +56,20 @@ const useIsMounted = () => {
 };
 
 const AddLearnersStep = ({
+  intl,
   subscriptionUUID,
   enterpriseSlug,
 }) => {
+
+  const tableColumns = [
+    selectColumn,
+    {
+      Header: intl.formatMessage(messages['bulk.stepper.table.header.email']),
+      accessor: 'userEmail',
+      Filter: TextFilter,
+    },
+  ];
+
   const [errors, setErrors] = useState('');
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({ results: [], count: 0, numPages: 1 });
@@ -118,11 +122,16 @@ const AddLearnersStep = ({
   return (
     <>
       <p>
-        {ADD_LEARNERS_DESCRIPTION}{' '}
-        <Link to={`/${enterpriseSlug}/admin/${ROUTE_NAMES.subscriptionManagement}/${subscriptionUUID}`}>{LINK_TEXT}</Link>
+        {intl.formatMessage(messages['bulk.stepper.add-learners.description'])}{' '}
+        <Link to={`/${enterpriseSlug}/admin/${ROUTE_NAMES.subscriptionManagement}/${subscriptionUUID}`}>
+          {intl.formatMessage(messages['bulk.stepper.add-learners.description.link'])}
+        </Link>
       </p>
-      <h2>{ADD_LEARNERS_TITLE}</h2>
-      {errors && <Alert variant="danger">{ADD_LEARNERS_ERROR_TEXT}</Alert>}
+      <h2>{intl.formatMessage(messages['bulk.stepper.add-learners.title'])}</h2>
+      {errors &&
+      <Alert variant="danger">
+        {intl.formatMessage(messages['bulk.stepper.add-learners.error.text'])}
+      </Alert>}
       <DataTable
         isFilterable
         manualFilters
@@ -152,8 +161,9 @@ const AddLearnersStep = ({
 };
 
 AddLearnersStep.propTypes = {
+  intl: intlShape.isRequired,
   subscriptionUUID: PropTypes.string.isRequired,
   enterpriseSlug: PropTypes.string.isRequired,
 };
 
-export default AddLearnersStep;
+export default injectIntl(AddLearnersStep);

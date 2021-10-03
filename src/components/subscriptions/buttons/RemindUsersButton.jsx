@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -24,7 +25,7 @@ const RemindUsersButton = ({
       <LicenseRemindModal
         pendingUsersCount={pendingUsersCount}
         isBulkRemind={isBulkRemind}
-        title="Remind Users"
+        title="Напомнить пользователям"
         subscriptionUUID={subscriptionUUID}
         onSuccess={onSuccess}
         onClose={() => {

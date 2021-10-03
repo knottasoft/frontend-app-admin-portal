@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -143,16 +144,16 @@ class CouponDetails extends React.Component {
 
   getSelectAllCheckBoxLabel = () => {
     if (this.hasAllTableRowsSelected) {
-      return 'unselect all codes';
+      return 'отменить выбор всех кодов';
     }
-    return 'select all codes';
+    return 'выбрать все коды';
   };
 
   getLabelForCodeCheckBox = (code) => {
     if (this.selectedTableRows[code]) {
-      return `unselect code ${code}`;
+      return `отменить выбор кода ${code}`;
     }
-    return `select code ${code}`;
+    return `выбрать код ${code}`;
   };
 
   reset() {
@@ -357,11 +358,11 @@ class CouponDetails extends React.Component {
       code: <span data-hj-suppress>{code.code}</span>,
       assigned_to: code.error ? (
         <span className="text-danger">
-          <Icon className="fa fa-exclamation-circle mr-2" screenReaderText="Error" />
+          <Icon className="fa fa-exclamation-circle mr-2" screenReaderText="Ошибка" />
           {code.error}
         </span>
       ) : code.assigned_to,
-      redemptions: `${code.redemptions.used} of ${code.redemptions.total}`,
+      redemptions: `${code.redemptions.used} из ${code.redemptions.total}`,
       assignments_remaining: `${code.redemptions.total - code.redemptions.used - code.redemptions.num_assignments}`,
       assignment_date: `${code.assignment_date}`,
       last_reminder_date: `${code.last_reminder_date}`,
@@ -374,7 +375,7 @@ class CouponDetails extends React.Component {
       />,
       select: (
         <CheckBox
-          name={`select code ${code.code}`}
+          name={`выбрать код ${code.code}`}
           label={
             <div className="sr-only">{this.getLabelForCodeCheckBox(code.code)}</div>
           }
@@ -563,7 +564,7 @@ class CouponDetails extends React.Component {
             <>
               <div className="details-header row no-gutters mb-5">
                 <div className="col-12 col-md-6 mb-2 mb-md-0">
-                  <h3>Coupon Details</h3>
+                  <h3>Подробности купона</h3>
                 </div>
                 <div className="col-12 col-md-6 mb-2 mb-md-0 text-md-right">
                   <DownloadCsvButton
@@ -599,12 +600,12 @@ class CouponDetails extends React.Component {
                       message: (
                         <>
                           {errors.length > 1
-                            ? `${errors.length} errors have occurred: ` : 'An error has occurred: '}
+                            ? `${errors.length} возникли ошибки: ` : 'произошла ошибка: '}
                           <ul className="m-0 pl-4">
                             {errors.map(error => (
                               <li key={error.code}>
-                                {`Unable to send code assignment email to
-                                 ${error.user_email} for ${error.code} code.`}
+                                {`Невозможно отправить письмо о присвоении кода по электронной почте
+                                 ${error.user_email} для ${error.code} кода.`}
                               </li>
                             ))}
                           </ul>
@@ -614,13 +615,13 @@ class CouponDetails extends React.Component {
                     {couponOverviewError && !couponOverviewLoading && this.renderErrorMessage({
                       message: (
                         <>
-                          Failed to fetch coupon overview data ({couponOverviewError.message}).
+                          Не удалось получить данные для обзора купонов ({couponOverviewError.message}).
                           <Button
                             variant="link"
                             className="p-0 pl-1 border-0"
                             onClick={() => this.props.fetchCouponOrder(id)}
                           >
-                            Please try again.
+                            Пожалуйста, попробуйте снова.
                           </Button>
                         </>
                       ),
@@ -629,7 +630,7 @@ class CouponDetails extends React.Component {
                       title: SUCCESS_MESSAGES.assign,
                       message: (
                         <>
-                          To view the newly assigned code(s), filter by
+                          Чтобы просмотреть вновь присвоенный код (коды), отфильтруйте по
                           <Button
                             variant="link"
                             className="p-0 pl-1 border-0"
@@ -641,7 +642,7 @@ class CouponDetails extends React.Component {
                               });
                             }}
                           >
-                            unredeemed codes.
+                            неиспользованным кодам.
                           </Button>
                         </>
                       ),
@@ -653,13 +654,13 @@ class CouponDetails extends React.Component {
                       message: SUCCESS_MESSAGES.revoke,
                     })}
                     {doesCodeActionHaveErrors && this.renderErrorMessage({
-                      title: 'An unexpected error has occurred. Please try again or contact your Customer Success Manager.',
+                      title: 'Произошла непредвиденная ошибка. Пожалуйста, попробуйте еще раз или свяжитесь с менеджером по работе с клиентами.',
                       message: '',
                     })}
                     {this.shouldShowSelectAllStatusAlert() && this.renderInfoMessage({
                       message: (
                         <>
-                          {hasAllCodesSelected ? `All ${tableData.count} codes are selected.` : `${selectedCodes.length} codes are selected.`}
+                          {hasAllCodesSelected ? `Все ${tableData.count} коды выбраны.` : `${selectedCodes.length} коды выбраны.`}
                           {!hasAllCodesSelected && (
                             <Button
                               variant="link"
@@ -668,7 +669,7 @@ class CouponDetails extends React.Component {
                                 hasAllCodesSelected: true,
                               })}
                             >
-                              {`Select all ${tableData.count} codes?`}
+                              {`Выбрать все ${tableData.count} коды?`}
                             </Button>
                           )}
                         </>

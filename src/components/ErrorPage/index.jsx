@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
@@ -19,11 +20,11 @@ function renderErrorComponent(status, message) {
   return (
     <>
       <Helmet>
-        <title>Error</title>
+        <title>Ошибка</title>
       </Helmet>
       <div className="row mt-4">
         <div className="col">
-          <h1>Error</h1>
+          <h1>Ошибка</h1>
           <StatusAlert
             alertType="danger"
             message={errorMessage}

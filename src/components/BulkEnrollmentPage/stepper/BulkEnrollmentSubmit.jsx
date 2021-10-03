@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, {
   useContext,
   useState,
@@ -9,14 +10,8 @@ import PropTypes from 'prop-types';
 import { logError } from '@edx/frontend-platform/logging';
 import {
   FINAL_BUTTON_TEST_ID,
-  FINAL_BUTTON_TEXT,
   NOTIFY_CHECKBOX_TEST_ID,
   CUSTOMER_SUPPORT_HYPERLINK_TEST_ID,
-  ALERT_MODAL_TITLE_TEXT,
-  ALERT_MODAL_BODY_TEXT,
-  SUPPORT_HYPERLINK_TEXT,
-  SUPPORT_EMAIL_SUBJECT,
-  SUPPORT_EMAIL_BODY,
 } from './constants';
 import LicenseManagerApiService from '../../../data/services/LicenseManagerAPIService';
 import { BulkEnrollContext } from '../BulkEnrollmentContext';
@@ -24,42 +19,52 @@ import { ToastsContext } from '../../Toasts';
 import { clearSelectionAction } from '../data/actions';
 import { configuration } from '../../../config';
 
+import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import messages from './BulkEnrollmentStepper.messages';
+
 export const BULK_ENROLL_ERROR = 'There was an ';
 
-export const BulkEnrollmentAlertModal = ({
-  isOpen, toggleClose, enterpriseSlug, error, enterpriseId,
+export const BulkEnrollmentAlertModal = injectIntl(({
+  isOpen, toggleClose, enterpriseSlug, error, enterpriseId, intl
 }) => (
   <AlertModal
-    title={ALERT_MODAL_TITLE_TEXT}
+    title={intl.formatMessage(messages['bulk.stepper.enrollment-submit.alert.title'])}
     isOpen={isOpen}
     onClose={toggleClose}
     footerNode={(
       <ActionRow>
-        <Button variant="primary" onClick={toggleClose}>OK</Button>
+        <Button variant="primary" onClick={toggleClose}>
+          {intl.formatMessage(messages['bulk.stepper.enrollment-submit.button'])}
+        </Button>
       </ActionRow>
     )}
   >
     <p>
-      {ALERT_MODAL_BODY_TEXT}
+      {intl.formatMessage(messages['bulk.stepper.enrollment-submit.alert.body'])}
       <MailtoLink
         to={configuration.CUSTOMER_SUPPORT_EMAIL}
         target="_blank"
         rel="noopener noreferrer"
         data-testid={CUSTOMER_SUPPORT_HYPERLINK_TEST_ID}
-        subject={SUPPORT_EMAIL_SUBJECT + enterpriseSlug}
-        body={`enterprise UUID: ${enterpriseId}\n${ SUPPORT_EMAIL_BODY }${error}`}
+        subject={
+          intl.formatMessage(messages['bulk.stepper.enrollment-submit.support-email.subject'], {enterpriseSlug: enterpriseSlug})
+        }
+        body={
+          intl.formatMessage(messages['bulk.stepper.enrollment-submit.support-email.body'], {enterpriseId: enterpriseId, error: error})
+        }
       >
-        {SUPPORT_HYPERLINK_TEXT}
+        {intl.formatMessage(messages['bulk.stepper.enrollment-submit.support-email.link'])}
       </MailtoLink>
     </p>
   </AlertModal>
-);
+));
 
 BulkEnrollmentAlertModal.defaultProps = {
-  error: 'Unknown error',
+  error: 'Неизвестная ошибка',
 };
 
 BulkEnrollmentAlertModal.propTypes = {
+  intl: intlShape,
   isOpen: PropTypes.bool.isRequired,
   toggleClose: PropTypes.func.isRequired,
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -67,13 +72,21 @@ BulkEnrollmentAlertModal.propTypes = {
   enterpriseSlug: PropTypes.string.isRequired,
 };
 
-export const generateSuccessMessage = numEmails => {
-  if (numEmails > 1) { return `${numEmails} learners have been enrolled.`; }
-  if (numEmails === 1) { return `${numEmails} learner has been enrolled.`; }
-  return 'No learners have been enrolled.';
+export const generateSuccessMessage = injectIntl((numEmails) => {
+  if (numEmails > 1) {
+    return this.props.intl.formatMessage(messages['bulk.stepper.enrollment-submit.success.many'], {numEmails: numEmails});
+  }
+  if (numEmails === 1) {
+    return this.props.intl.formatMessage(messages['bulk.stepper.enrollment-submit.success.one'], {numEmails: numEmails});
+  }
+  return this.props.intl.formatMessage(messages['bulk.stepper.enrollment-submit.success.zero']);
+});
+
+generateSuccessMessage.propTypes = {
+  intl: intlShape.isRequired,
 };
 
-const BulkEnrollmentSubmit = ({ enterpriseId, enterpriseSlug, returnToInitialStep }) => {
+const BulkEnrollmentSubmit = ({ enterpriseId, enterpriseSlug, returnToInitialStep, intl }) => {
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(true);
   const [error, setError] = useState('');
@@ -130,23 +143,24 @@ const BulkEnrollmentSubmit = ({ enterpriseId, enterpriseSlug, returnToInitialSte
         onChange={handleChange}
         data-testid={NOTIFY_CHECKBOX_TEST_ID}
       >
-        Notify learners via Email
+        {intl.formatMessage(messages['bulk.stepper.enrollment-submit.notify.checkbox'])}
       </Form.Checkbox>
       <Button
         disabled={!hasSelectedCoursesAndEmails && !loading}
         onClick={submitBulkEnrollment}
         data-testid={FINAL_BUTTON_TEST_ID}
       >
-        {FINAL_BUTTON_TEXT}
+        {intl.formatMessage(messages['bulk.stepper.enrollment-submit.final.button-text'])}
       </Button>
     </>
   );
 };
 
 BulkEnrollmentSubmit.propTypes = {
+  intl: intlShape.isRequired,
   enterpriseId: PropTypes.string.isRequired,
   enterpriseSlug: PropTypes.string.isRequired,
   returnToInitialStep: PropTypes.func.isRequired,
 };
 
-export default BulkEnrollmentSubmit;
+export default injectIntl(BulkEnrollmentSubmit);

@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
@@ -102,8 +103,8 @@ class InviteLearnersModal extends React.Component {
             <Field
               name="email-addresses"
               component={TextAreaAutoSize}
-              label="Email Address"
-              description="To add more than one user, enter one email address per line."
+              label="Адрес электронной почты"
+              description="Чтобы добавить более одного пользователя, введите один адрес электронной почты в каждой строке."
               data-hj-suppress
             />
             <p className="pb-2">
@@ -113,8 +114,8 @@ class InviteLearnersModal extends React.Component {
               id="csv-email-addresses"
               name="csv-email-addresses"
               component={FileInput}
-              label="Upload Email Addresses"
-              description="The file must be a CSV containing a single column of email addresses."
+              label="Загрузить адреса электронной почты"
+              description="Файл должен представлять собой CSV, содержащий один столбец адресов электронной почты."
               accept=".csv"
               normalize={normalizeFileUpload}
               data-hj-suppress
@@ -123,7 +124,7 @@ class InviteLearnersModal extends React.Component {
             <Field
               name="email-template-greeting"
               component={TextAreaAutoSize}
-              label="Customize Greeting"
+              label="Настроить приветствие"
               data-hj-suppress
             />
             <Field
@@ -135,7 +136,7 @@ class InviteLearnersModal extends React.Component {
             <Field
               name="email-template-closing"
               component={TextAreaAutoSize}
-              label="Customize Closing"
+              label="Настроить завершение"
               data-hj-suppress
             />
           </div>
@@ -155,7 +156,7 @@ class InviteLearnersModal extends React.Component {
         <StatusAlert
           alertType="danger"
           iconClassName="fa fa-times-circle"
-          title="Unable to subscribe users"
+          title="Неудается оформить подписку на пользователей"
           message={error.length > 1 ? (
             <ul className="m-0 pl-4">
               {error.map(message => <li key={message}>{message}</li>)}
@@ -180,7 +181,7 @@ class InviteLearnersModal extends React.Component {
         <Modal
           ref={this.modalRef}
           dialogClassName="add-users"
-          title="Invite learners"
+          title="Пригласить обучающихся"
           body={this.renderBody()}
           buttons={[
             <Button
@@ -191,11 +192,11 @@ class InviteLearnersModal extends React.Component {
             >
               <>
                 {submitting && <Icon className="fa fa-spinner fa-spin mr-2" />}
-                Invite learners
+                Пригласить обучающихся
               </>
             </Button>,
           ]}
-          closeText="Cancel"
+          closeText="Отменить"
           onClose={onClose}
           open
         />

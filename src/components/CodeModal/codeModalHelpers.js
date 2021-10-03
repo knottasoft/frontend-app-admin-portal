@@ -1,6 +1,6 @@
-export const displayCode = (code) => `Code: ${code}`;
-export const displayEmail = (email) => `Email: ${email}`;
-export const displaySelectedCodes = (numSelectedCodes) => `Selected codes: ${numSelectedCodes}`;
+export const displayCode = (code) => `Код: ${code}`;
+export const displayEmail = (email) => `Электронная почта: ${email}`;
+export const displaySelectedCodes = (numSelectedCodes) => `Выбранные коды: ${numSelectedCodes}`;
 
 export function appendUserCodeDetails(assignedEmail, assignedCode, assignments) {
   assignments.push({

@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Icon } from '@edx/paragon';
@@ -36,7 +37,7 @@ DownloadCsvButton.defaultProps = {
   csvLoading: false,
   fetchMethod: () => {},
   disabled: false,
-  buttonLabel: 'Download full report (CSV)',
+  buttonLabel: 'Скачать полный отчет (CSV)',
 };
 
 DownloadCsvButton.propTypes = {

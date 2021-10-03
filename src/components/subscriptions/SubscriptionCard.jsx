@@ -1,9 +1,12 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { Card, Badge, Button } from '@edx/paragon';
 import { ROUTE_NAMES } from '../EnterpriseApp/constants';
+
+import { injectIntl, FormattedDate } from '@edx/frontend-platform/i18n';
 
 const SubscriptionCard = ({
   uuid,
@@ -32,18 +35,18 @@ const SubscriptionCard = ({
         {isExpired && (
           <div>
             <Badge variant="danger">
-              Expired
+              Истекший
             </Badge>
           </div>
         )}
         <p className="mt-2 small">
-          {formattedStartDate} - {formattedExpirationDate}
+          <FormattedDate value={formattedStartDate} /> - <FormattedDate value={formattedExpirationDate} />
         </p>
         <p className="mt-3 mb-0 small">
-          License assignments
+          Назначено лицензий
         </p>
         <p className="lead font-weight-bold">
-          {allocated} of {total}
+          {allocated} из {total}
         </p>
         <div className="d-flex">
           <div className="ml-auto">
@@ -76,4 +79,4 @@ SubscriptionCard.propTypes = {
   buttonText: PropTypes.string,
 };
 
-export default SubscriptionCard;
+export default injectIntl(SubscriptionCard);

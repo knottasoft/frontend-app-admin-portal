@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
@@ -32,7 +33,7 @@ function configFormReducer(state, action) {
         ...state,
         submitState: SUBMIT_STATES.ERROR,
         invalidFields: action.value,
-        error: 'Form could not be submitted as there are fields with invalid values. Please correct them below.',
+        error: 'Форма не может быть отправлена, так как есть поля с недопустимыми значениями. Пожалуйста, исправьте их ниже.',
       };
     }
     case 'COMPLETE': {
@@ -160,7 +161,7 @@ function DegreedIntegrationConfigForm({ enterpriseId, config }) {
         <StatusAlert
           alertType="danger"
           iconClassName="fa fa-times-circle"
-          title="Unable to submit config form:"
+          title="Неудается отправить форму конфигурации:"
           message={state.error}
           dismissible
         />
@@ -187,7 +188,7 @@ function DegreedIntegrationConfigForm({ enterpriseId, config }) {
           <ValidationFormGroup
             for="active"
           >
-            <label htmlFor="active">Active</label>
+            <label htmlFor="active">Активно</label>
             <Input
               type="checkbox"
               id="active"
@@ -204,10 +205,10 @@ function DegreedIntegrationConfigForm({ enterpriseId, config }) {
           <ValidationFormGroup
             for="degreedCompanyId"
             invalid={state.invalidFields.degreedCompanyId}
-            invalidMessage="Degreed Organization Code is required."
-            helpText="The organization code provided to you by Degreed."
+            invalidMessage="Требуется код организации Degreed."
+            helpText="Код организации, предоставленный вам компанией Degreed."
           >
-            <label htmlFor="degreedCompanyId">Degreed Organization Code</label>
+            <label htmlFor="degreedCompanyId">Код организации Degreed</label>
             <Input
               type="text"
               id="degreedCompanyId"
@@ -223,10 +224,10 @@ function DegreedIntegrationConfigForm({ enterpriseId, config }) {
           <ValidationFormGroup
             for="degreedBaseUrl"
             invalid={state.invalidFields.degreedBaseUrl}
-            invalidMessage="Degreed Instance URL is required."
-            helpText="Your Degreed instance URL. Make sure to include the protocol (ie https/http)"
+            invalidMessage="Требуется URL-адрес экземпляра Degreed"
+            helpText="URL-адрес вашего экземпляра Degreed. Обязательно укажите протокол (т.е. https/http)."
           >
-            <label htmlFor="degreedBaseUrl">Degreed Instance URL</label>
+            <label htmlFor="degreedBaseUrl">URL-адрес экземпляра Degreed</label>
             <Input
               type="text"
               id="degreedBaseUrl"
@@ -242,10 +243,10 @@ function DegreedIntegrationConfigForm({ enterpriseId, config }) {
           <ValidationFormGroup
             for="key"
             invalid={state.invalidFields.key}
-            invalidMessage="Degreed API Client ID required."
-            helpText="The API Client ID used to make calls to Degreed on behalf of the customer."
+            invalidMessage="Требуется идентификатор клиента API Degreed."
+            helpText="Идентификатор клиента API, используемый для выполнения вызовов в Degreed от имени клиента."
           >
-            <label htmlFor="key">API Client ID</label>
+            <label htmlFor="key">Идентификатор клиента API</label>
             <Input
               type="text"
               id="key"
@@ -261,10 +262,10 @@ function DegreedIntegrationConfigForm({ enterpriseId, config }) {
           <ValidationFormGroup
             for="secret"
             invalid={state.invalidFields.secret}
-            invalidMessage="Degreed API Client Secret required."
-            helpText="The API Client Secret used to make calls to Degreed on behalf of the customer."
+            invalidMessage="Требуется наличие секрет клиента API Degreed"
+            helpText="Секрет клиента API, используемый для совершения вызовов в Degreed от имени клиента."
           >
-            <label htmlFor="secret">API Client Secret</label>
+            <label htmlFor="secret">Секрет клиента API</label>
             <Input
               type="password"
               id="secret"
@@ -280,10 +281,10 @@ function DegreedIntegrationConfigForm({ enterpriseId, config }) {
           <ValidationFormGroup
             for="degreedUserId"
             invalid={state.invalidFields.degreedUserId}
-            invalidMessage="The Degreed User ID is required to access Degreed via Oauth."
-            helpText="The Degreed User ID provided to the content provider by Degreed."
+            invalidMessage="Идентификатор пользователя Degreed требуется для доступа к Degreed через Oauth."
+            helpText="Идентификатор пользователя Degreed, предоставленный поставщику контента компанией Degreed."
           >
-            <label htmlFor="degreedUserId">Degreed User ID</label>
+            <label htmlFor="degreedUserId">Идентификатор пользователя Degreed</label>
             <Input
               type="text"
               id="degreedUserId"
@@ -299,10 +300,10 @@ function DegreedIntegrationConfigForm({ enterpriseId, config }) {
           <ValidationFormGroup
             for="degreedUserPassword"
             invalid={state.invalidFields.degreedUserPassword}
-            invalidMessage="The Degreed User Password is required to access Degreed via Oauth."
-            helpText="The Degreed User Password provided to the content provider by Degreed."
+            invalidMessage="Пароль пользователя Degreed требуется для доступа к Degreed через Oauth."
+            helpText="Пароль пользователя Degreed, предоставленный поставщику контента компанией Degreed."
           >
-            <label htmlFor="degreedUserPassword">Degreed User Password</label>
+            <label htmlFor="degreedUserPassword">Пароль пользователя Degreed</label>
             <Input
               type="password"
               id="degreedUserPassword"
@@ -321,10 +322,10 @@ function DegreedIntegrationConfigForm({ enterpriseId, config }) {
             type="submit"
             id="submitButton"
             labels={{
-              default: 'Submit',
-              pending: 'Saving...',
-              complete: 'Complete',
-              error: 'Error',
+              default: 'Отправить',
+              pending: 'Сохранение...',
+              complete: 'Завершено',
+              error: 'Ошибка',
             }}
             icons={{
               default: <Icon className="fa fa-download" />,

@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Cookies from 'universal-cookie';
@@ -8,7 +9,7 @@ import { getSubscriptionExpiringCookieName } from '../data/utils';
 
 import { formatTimestamp } from '../../../utils';
 
-export const EXPIRING_MODAL_TITLE = 'Renew your expiring subscription';
+export const EXPIRING_MODAL_TITLE = 'Продлить подписку с истекающим сроком действия';
 
 const SubscriptionExpiringModal = ({
   onClose,
@@ -47,17 +48,16 @@ const SubscriptionExpiringModal = ({
     >
       <ModalDialog.Body>
         <p>
-          This subscription cohort is set to expire in {daysUntilExpiration} days.
-          In order to minimize course access disruptions for your learners, make sure your invoice has
-          been completed.
+          Срок действия этой когорты подписчиков истекает через {daysUntilExpiration} дней.
+          Чтобы минимизировать сбои в доступе к курсу для ваших учеников, убедитесь, что счет оплачен.
         </p>
         <p>
-          If you have questions or need help, please contact the edX Customer Success team at
+          Если у вас есть вопросы или вам нужна помощь, пожалуйста, свяжитесь с командой ЦОПП СК по адресу
           {' '}
-          <MailtoLink to="customersuccess@edx.org">customersuccess@edx.org</MailtoLink>.
+          <MailtoLink to="customersuccess@edx.org">support@copp26.ru</MailtoLink>.
         </p>
         <i>
-          Access expires on {formatTimestamp({ timestamp: expirationDate })}
+          Срок действия доступа истекает {formatTimestamp({ timestamp: expirationDate })}
         </i>
       </ModalDialog.Body>
     </ModalDialog>

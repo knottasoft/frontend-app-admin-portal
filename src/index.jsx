@@ -14,6 +14,8 @@ import { configuration } from './config';
 
 import App from './components/App';
 
+import appMessages from './i18n';
+
 import './index.scss';
 
 subscribe(APP_READY, () => {
@@ -34,7 +36,9 @@ initialize({
       });
     },
   },
-  messages: [],
+  messages: [
+    appMessages
+  ],
   requireAuthenticatedUser: false,
   hydrateAuthenticatedUser: true,
 });

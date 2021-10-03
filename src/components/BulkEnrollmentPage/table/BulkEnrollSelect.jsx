@@ -9,12 +9,14 @@ import {
 } from '../data/actions';
 import { BulkEnrollContext } from '../BulkEnrollmentContext';
 
+import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import messages from './BulkEnrollmentTable.messages';
+
 export const SELECT_ONE_TEST_ID = 'selectOne';
 export const SELECT_ALL_TEST_ID = 'selectAll';
 
-export const BaseSelectWithContext = ({ row, contextKey }) => {
+export const BaseSelectWithContext = injectIntl(({ row, contextKey, intl }) => {
   const { [contextKey]: [selectedRows, dispatch] } = useContext(BulkEnrollContext);
-
   const isSelected = useMemo(() => selectedRows.some((selection) => selection.id === row.id), [selectedRows]);
 
   const toggleSelected = isSelected
@@ -26,7 +28,7 @@ export const BaseSelectWithContext = ({ row, contextKey }) => {
       {/* eslint-disable-next-line react/prop-types */}
       <CheckboxControl
         style={{ cursor: 'pointer' }}
-        title="Toggle row selected"
+        title={intl.formatMessage(messages['bulk.table.select.checkbox'])}
         checked={isSelected}
         onChange={toggleSelected}
         isIndeterminate={false}
@@ -34,9 +36,10 @@ export const BaseSelectWithContext = ({ row, contextKey }) => {
       />
     </div>
   );
-};
+});
 
 BaseSelectWithContext.propTypes = {
+  intl: intlShape.isRequired,
   row: PropTypes.shape({
     id: PropTypes.string.isRequired,
   }).isRequired,
@@ -44,11 +47,10 @@ BaseSelectWithContext.propTypes = {
   contextKey: PropTypes.string.isRequired,
 };
 
-export const BaseSelectWithContextHeader = ({
-  rows, contextKey,
+export const BaseSelectWithContextHeader = injectIntl(({
+  rows, contextKey, intl
 }) => {
   const { [contextKey]: [selectedRows, dispatch] } = useContext(BulkEnrollContext);
-
   const selectedRowIds = selectedRows.map(row => row.id);
   const isAllRowsSelected = checkForSelectedRows(selectedRows.map(row => row.id), rows);
   const anyRowsSelected = rows.some((row) => selectedRowIds.includes(row.id));
@@ -60,7 +62,7 @@ export const BaseSelectWithContextHeader = ({
     <div>
       <CheckboxControl
         style={{ cursor: 'pointer' }}
-        title="Toggle all rows selected"
+        title={intl.formatMessage(messages['bulk.table.select.checkbox.all'])}
         checked={isAllRowsSelected}
         onChange={toggleAllRowsSelectedBulkEn}
         isIndeterminate={anyRowsSelected && !isAllRowsSelected}
@@ -68,9 +70,10 @@ export const BaseSelectWithContextHeader = ({
       />
     </div>
   );
-};
+});
 
 BaseSelectWithContextHeader.propTypes = {
+  intl: intlShape.isRequired,
   rows: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
   })).isRequired,

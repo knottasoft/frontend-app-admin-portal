@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -177,11 +178,11 @@ class SamlProviderConfiguration extends React.Component {
                         )}
                       />
                       <div className="col">
-                        <h3 className="h6">Entity ID:</h3>
+                        <h3 className="h6">ID сущности:</h3>
                         <p>{providerConfig.entity_id}</p>
                       </div>
                       <div className="col">
-                        <h3 className="h6">Metadata Source:</h3>
+                        <h3 className="h6">Источник метаданных:</h3>
                         <p>{providerConfig.metadata_source}</p>
                       </div>
                     </div>
@@ -208,11 +209,11 @@ class SamlProviderConfiguration extends React.Component {
                   title={(
                     <div className="row justify-content-around flex-fill">
                       <div className="col">
-                        <h3 className="h6">Fetched At:</h3>
+                        <h3 className="h6">Получено в:</h3>
                         <p>{providerData.fetched_at}</p>
                       </div>
                       <div className="col">
-                        <h3 className="h6">Entity ID:</h3>
+                        <h3 className="h6">ID сущности:</h3>
                         <p>{providerData.entity_id}</p>
                       </div>
                       <div className="col">
@@ -234,7 +235,7 @@ class SamlProviderConfiguration extends React.Component {
             {!providerConfig && (
               <Collapsible
                 styling="basic"
-                title="Add a SAML Provider Configuration"
+                title="Добавить конфигурацию поставщика SAML"
                 className="col justify-content-center align-items-center"
               >
                 <div>
@@ -248,7 +249,7 @@ class SamlProviderConfiguration extends React.Component {
             {(providerConfig && !providerData) && (
               <Collapsible
                 styling="basic"
-                title="Add SAML Provider Data"
+                title="Добавить данные поставщика SAML"
                 className="col justify-content-center align-items-center"
               >
                 <div>

@@ -1,3 +1,4 @@
+// TODO: Lang support
 /* eslint-disable import/prefer-default-export */
 
 export const COUPON_FILTER_TYPES = {
@@ -9,34 +10,34 @@ export const COUPON_FILTER_TYPES = {
 
 export const COUPON_FILTERS = {
   unassigned: {
-    label: 'Unassigned',
+    label: 'Нераспределены',
     value: COUPON_FILTER_TYPES.unassigned,
   },
   unredeemed: {
-    label: 'Unredeemed',
+    label: 'Непогашены',
     value: COUPON_FILTER_TYPES.unredeemed,
   },
   partiallyRedeemed: {
-    label: 'Partially redeemed',
+    label: 'Частично погашены',
     value: COUPON_FILTER_TYPES.partiallyRedeemed,
   },
   redeemed: {
-    label: 'Redeemed',
+    label: 'Погашены',
     value: COUPON_FILTER_TYPES.redeemed,
   },
 };
 
 export const ACTIONS = {
   remind: {
-    label: 'Remind',
+    label: 'Напомнить',
     value: 'remind',
   },
   assign: {
-    label: 'Assign',
+    label: 'Присвоить',
     value: 'assign',
   },
   revoke: {
-    label: 'Revoke',
+    label: 'Отозвать',
     value: 'revoke',
   },
 };
@@ -67,49 +68,49 @@ export const BULK_ACTION_SELECT_OPTIONS = [{
 }];
 
 export const BULK_ACTION = {
-  label: 'Bulk action',
+  label: 'Массовое действие',
   name: 'bulk-actions',
   controlId: 'bulkActions',
 };
 
 export const DETAILS_TEXT = {
-  expanded: 'Detailed breakdown',
-  unexpanded: 'Details',
+  expanded: 'Подробное описание',
+  unexpanded: 'Подробнее',
   expandedScreenReader: 'Close details',
   unexpandedScreenReader: 'Show details',
 };
 
 export const COLUMNS = {
   redemptions: {
-    label: 'Redemptions',
+    label: 'Погашения',
     key: 'redemptions',
   },
   code: {
-    label: 'Code',
+    label: 'Код',
     key: 'code',
   },
   assignmentsRemaining: {
-    label: 'Assignments remaining',
+    label: 'Оставшиеся назначения',
     key: 'assignments_remaining',
   },
   actions: {
-    label: 'Actions',
+    label: 'Действия',
     key: 'actions',
   },
   lastReminderDate: {
-    label: 'Last reminder date',
+    label: 'Дата последнего напоминания',
     key: 'last_reminder_date',
   },
   assignmentDate: {
-    label: 'Assignment date',
+    label: 'Дата присвоения',
     key: 'assignment_date',
   },
   assignedTo: {
-    label: 'Assigned to',
+    label: 'Присвоено',
     key: 'assigned_to',
   },
   redeemedBy: {
-    label: 'Redeemed by',
+    label: 'Погашено',
     key: 'assigned_to',
   },
 };
@@ -149,7 +150,7 @@ export const DEFAULT_TABLE_COLUMNS = {
 };
 
 export const SUCCESS_MESSAGES = {
-  assign: 'Successfully assigned code(s)',
-  remind: 'Reminder request processed.',
-  revoke: 'Successfully revoked code(s)',
+  assign: 'Успешно присвоенный код(ы)',
+  remind: 'Запрос на напоминание обработан.',
+  revoke: 'Успешно отозванный код(ы)',
 };

@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect, withRouter } from 'react-router-dom';
@@ -12,7 +13,7 @@ import SearchBar from '../SearchBar';
 import SurveyPage from '../SurveyPage';
 import { updateUrl } from '../../utils';
 
-export const TITLE = 'Enterprise List';
+export const TITLE = 'Список предприятий';
 
 class EnterpriseList extends React.Component {
   constructor(props) {
@@ -102,7 +103,7 @@ class EnterpriseList extends React.Component {
     const { error, loading, enterpriseList } = this.props;
     const columns = [
       {
-        label: 'Enterprise',
+        label: 'Предприятие',
         key: 'link',
       },
     ];
@@ -125,7 +126,7 @@ class EnterpriseList extends React.Component {
               </div>
               <div className="col-sm-12 col-md-6 col-lg-4 mb-3 mb-md-0">
                 <SearchBar
-                  placeholder="Search by enterprise name..."
+                  placeholder="Поиск по названию предприятия..."
                   onSearch={query => updateUrl({
                     search: query,
                     page: 1,

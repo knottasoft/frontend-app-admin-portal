@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import qs from 'query-string';
@@ -107,8 +108,8 @@ class TableComponent extends React.Component {
       <StatusAlert
         alertType="danger"
         iconClassName="fa fa-times-circle"
-        title="Unable to load data"
-        message={`Try refreshing your screen (${this.props.error.message})`}
+        title="Не удается загрузить данные"
+        message={`Попробуйте обновить экран (${this.props.error.message})`}
       />
     );
   }
@@ -118,7 +119,7 @@ class TableComponent extends React.Component {
       <StatusAlert
         alertType="warning"
         iconClassName="fa fa-exclamation-circle"
-        message="There are no results."
+        message="Нет результатов."
       />
     );
   }

@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
@@ -155,7 +156,7 @@ class ReportingConfigForm extends React.Component {
           <ValidationFormGroup
             for="active"
           >
-            <label htmlFor="active">Active</label>
+            <label htmlFor="active">Активно</label>
             <Input
               type="checkbox"
               id="active"
@@ -170,9 +171,9 @@ class ReportingConfigForm extends React.Component {
           <div className="col col-6">
             <ValidationFormGroup
               for="dataType"
-              helpText="The type of data this report should contain. If this is an old report, you will not be able to change this field, and should create a new report"
+              helpText="Тип данных, которые должен содержать этот отчет. Если это старый отчет, вы не сможете изменить это поле и должны создать новый отчет."
             >
-              <label htmlFor="dataType">Data Type</label>
+              <label htmlFor="dataType">Тип данных</label>
               <Input
                 type="select"
                 id="dataType"
@@ -180,17 +181,17 @@ class ReportingConfigForm extends React.Component {
                 defaultValue={config ? config.dataType : 'progress_v2'}
                 disabled={config && config.dataType === 'progress'}
                 options={[
-                  { value: 'progress_v2', label: 'progress' },
-                  { value: 'catalog', label: 'catalog' },
-                  { value: 'progress', label: 'progress', hidden: true },
+                  { value: 'progress_v2', label: 'прогресс' },
+                  { value: 'catalog', label: 'каталог' },
+                  { value: 'progress', label: 'прогресс', hidden: true },
                 ]}
               />
             </ValidationFormGroup>
             <ValidationFormGroup
               for="reportType"
-              helpText="The type this report should be sent as, e.g. CSV"
+              helpText="Тип, в котором должен быть отправлен отчет, например, CSV"
             >
-              <label htmlFor="reportType">Report Type</label>
+              <label htmlFor="reportType">Тип отчета</label>
               <Input
                 type="select"
                 id="reportType"
@@ -206,9 +207,9 @@ class ReportingConfigForm extends React.Component {
           <div className="col col-6">
             <ValidationFormGroup
               for="deliveryMethod"
-              helpText="The method in which the data should be sent"
+              helpText="Метод, которым должны быть отправлены данные"
             >
-              <label htmlFor="deliveryMethod">Delivery Method</label>
+              <label htmlFor="deliveryMethod">Способ доставки</label>
               <Input
                 type="select"
                 id="deliveryMethod"
@@ -223,18 +224,18 @@ class ReportingConfigForm extends React.Component {
             </ValidationFormGroup>
             <ValidationFormGroup
               for="frequency"
-              helpText="The frequency interval (daily, weekly, or monthly) that the report should be sent"
+              helpText="Интервал частоты (ежедневно, еженедельно или ежемесячно), с которым должен отправляться отчет"
             >
-              <label htmlFor="frequency">Frequency</label>
+              <label htmlFor="frequency">Периодичность</label>
               <Input
                 type="select"
                 id="frequency"
                 name="frequency"
                 defaultValue={frequency}
                 options={[
-                  { value: 'daily', label: 'Daily' },
-                  { value: 'weekly', label: 'Weekly' },
-                  { value: 'monthly', label: 'Monthly' },
+                  { value: 'daily', label: 'Ежедневно' },
+                  { value: 'weekly', label: 'Еженедельно' },
+                  { value: 'monthly', label: 'Ежемесячно' },
                 ]}
                 onChange={e => this.setState({ frequency: e.target.value })}
               />
@@ -245,10 +246,10 @@ class ReportingConfigForm extends React.Component {
           <div className="col">
             <ValidationFormGroup
               for="dayOfMonth"
-              helpText="The day of the month to send the report. This field is required and only valid when the frequency is monthly"
+              helpText="День месяца для отправки отчета. Это поле является обязательным и действует только в том случае, если периодичность является ежемесячной."
               invalid={frequency === 'monthly' && invalidFields.dayOfMonth}
             >
-              <label htmlFor="dayOfMonth">Day of Month</label>
+              <label htmlFor="dayOfMonth">День месяца</label>
               <Input
                 type="number"
                 max={MONTHLY_MAX}
@@ -264,22 +265,22 @@ class ReportingConfigForm extends React.Component {
           <div className="col">
             <ValidationFormGroup
               for="dayOfWeek"
-              helpText="The day of the week to send the report. This field is required and only valid when the frequency is weekly"
+              helpText="День недели для отправки отчета. Это поле является обязательным и действует только в том случае, если периодичность - еженедельная."
             >
-              <label htmlFor="dayOfWeek">Day of Week</label>
+              <label htmlFor="dayOfWeek">День недели</label>
               <Input
                 type="select"
                 id="dayOfWeek"
                 name="dayOfWeek"
                 disabled={!(frequency === 'weekly')}
                 options={[
-                  { value: 0, label: 'Monday' },
-                  { value: 1, label: 'Tuesday' },
-                  { value: 2, label: 'Wednesday' },
-                  { value: 3, label: 'Thursday' },
-                  { value: 4, label: 'Friday' },
-                  { value: 5, label: 'Saturday' },
-                  { value: 6, label: 'Sunday' },
+                  { value: 0, label: 'Понедельник' },
+                  { value: 1, label: 'Вторник' },
+                  { value: 2, label: 'Среда' },
+                  { value: 3, label: 'Четверг' },
+                  { value: 4, label: 'Пятница' },
+                  { value: 5, label: 'Суббота' },
+                  { value: 6, label: 'Воскресенье' },
                 ]}
                 defaultValue={config ? config.dayOfWeek : undefined}
               />
@@ -288,11 +289,11 @@ class ReportingConfigForm extends React.Component {
           <div className="col">
             <ValidationFormGroup
               for="hourOfDay"
-              helpText="The hour of the day to send the report, in Eastern Standard Time (EST). This is required for all frequency settings"
+              helpText="Час дня для отправки отчета, по восточному стандартному времени (EST). Это требуется для всех настроек частоты"
               invalid={invalidFields.hourOfDay}
-              invalidMessage="Required for all frequency types"
+              invalidMessage="Требуется для всех типов частот"
             >
-              <label htmlFor="hourOfDay">Hour of Day</label>
+              <label htmlFor="hourOfDay">Время суток</label>
               <Input
                 type="number"
                 id="hourOfDay"
@@ -305,9 +306,9 @@ class ReportingConfigForm extends React.Component {
         </div>
         <ValidationFormGroup
           for="pgpEncyptionKey"
-          helpText="The key for encyption, if PGP encrypted file is required"
+          helpText="Ключ для шифрования, если требуется зашифрованный файл PGP"
         >
-          <label htmlFor="pgpEncryptionKey">PGP Encryption Key</label>
+          <label htmlFor="pgpEncryptionKey">Ключ шифрования PGP</label>
           <Input
             type="textarea"
             id="pgpEncryptionKey"
@@ -333,9 +334,9 @@ class ReportingConfigForm extends React.Component {
         <div className="col">
           <ValidationFormGroup
             for="enterpriseCustomerCatalogs"
-            helpText="The catalogs that should be included in the report. No selection means all catalogs will be included."
+            helpText="Каталоги, которые должны быть включены в отчет. Отсутствие выбора означает, что все каталоги будут включены."
           >
-            <label htmlFor="enterpriseCustomerCatalogs">Enterprise Customer Catalogs</label>
+            <label htmlFor="enterpriseCustomerCatalogs">Каталоги корпоративного клиента</label>
             <Input
               type="select"
               id="enterpriseCustomerCatalogs"
@@ -345,7 +346,7 @@ class ReportingConfigForm extends React.Component {
               options={
                 availableCatalogs.map(item => ({
                   value: item.uuid,
-                  label: `Catalog "${item.title}" with UUID "${item.uuid}"`,
+                  label: `Каталог "${item.title}" с UUID "${item.uuid}"`,
                 }))
               }
             />
@@ -354,7 +355,7 @@ class ReportingConfigForm extends React.Component {
         <div className="row justify-content-between align-items-center form-group">
           <ValidationFormGroup
             for="submitButton"
-            invalidMessage="There was an error submitting, please try again."
+            invalidMessage="Произошла ошибка при отправке, пожалуйста, попробуйте еще раз."
             invalid={submitState === SUBMIT_STATES.ERROR}
             className="mb-0"
           >
@@ -363,10 +364,10 @@ class ReportingConfigForm extends React.Component {
               type="submit"
               id="submitButton"
               labels={{
-                default: 'Submit',
-                pending: 'Saving...',
-                complete: 'Complete',
-                error: 'Error',
+                default: 'Отправить',
+                pending: 'Сохранение...',
+                complete: 'Завершено',
+                error: 'Ошибка',
               }}
               icons={{
                 default: <Icon className="fa fa-download" />,
@@ -384,7 +385,7 @@ class ReportingConfigForm extends React.Component {
               className="btn-outline-danger  mr-3"
               onClick={() => this.props.deleteConfig(config.uuid)}
             >
-              <Icon className="fa fa-times danger" /> Delete
+              <Icon className="fa fa-times danger" /> Удалить
             </Button>
           )}
         </div>

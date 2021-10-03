@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
@@ -104,7 +105,7 @@ class BlackboardIntegrationConfigForm extends React.Component {
           <StatusAlert
             alertType="danger"
             iconClassName="fa fa-times-circle"
-            title="Unable to submit config form:"
+            title="Неудается отправить форму конфигурации:"
             message={error}
           />
         </div>
@@ -125,7 +126,7 @@ class BlackboardIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="active"
             >
-              <label htmlFor="active">Active</label>
+              <label htmlFor="active">Активно</label>
               <Input
                 type="checkbox"
                 id="active"
@@ -142,10 +143,10 @@ class BlackboardIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="blackboardBaseUrl"
               invalid={invalidFields.blackboardBaseUrl}
-              invalidMessage="Blackboard Instance URL is required."
-              helpText="Your Blackboard instance URL. Make sure to include the protocol (ie https/http)"
+              invalidMessage="Требуется URL-адрес инстанции Blackboard."
+              helpText="URL-адрес вашего экземпляра Blackboard. Обязательно укажите протокол (т.е. https/http)."
             >
-              <label htmlFor="blackboardBaseUrl">Blackboard Instance URL</label>
+              <label htmlFor="blackboardBaseUrl">URL-адрес экземпляра Blackboard</label>
               <Input
                 type="text"
                 id="blackboardBaseUrl"
@@ -161,10 +162,10 @@ class BlackboardIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="clientId"
               invalid={invalidFields.clientId}
-              invalidMessage="Blackboard client ID is required."
-              helpText="This should match the API Client ID found on Blackboard."
+              invalidMessage="Требуется идентификатор клиента Blackboard."
+              helpText="Он должен совпадать с идентификатором клиента API, указанным в Blackboard."
             >
-              <label htmlFor="clientId">Blackboard Client ID</label>
+              <label htmlFor="clientId">Идентификатор клиента Blackboard</label>
               <Input
                 type="text"
                 id="clientId"
@@ -180,10 +181,10 @@ class BlackboardIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="clientSecret"
               invalid={invalidFields.clientSecret}
-              invalidMessage="Blackboard client secret is required."
-              helpText="This should match the API Client secret found on Blackboard."
+              invalidMessage="Требуется секрет клиента Blackboard."
+              helpText="Он должен соответствовать секрету клиента API, указанному в Blackboard."
             >
-              <label htmlFor="clientSecret">Blackboard Client Secret</label>
+              <label htmlFor="clientSecret">Секрет клиента Blackboard</label>
               <Input
                 type="text"
                 id="clientSecret"
@@ -198,9 +199,9 @@ class BlackboardIntegrationConfigForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="refreshToken"
-              helpText="The Blackboard API's refresh token token. This should be automatically propagated once you visit the oauth complete endpoint."
+              helpText="Токен обновления Blackboard API. Он должен автоматически распространяться после посещения конечной точки oauth complete."
             >
-              <label htmlFor="refreshToken">Blackboard API Refresh Token</label>
+              <label htmlFor="refreshToken">Токен обновления API Blackboard</label>
               <Input
                 type="text"
                 id="refreshToken"
@@ -219,10 +220,10 @@ class BlackboardIntegrationConfigForm extends React.Component {
               type="submit"
               id="submitButton"
               labels={{
-                default: 'Submit',
-                pending: 'Saving...',
-                complete: 'Complete',
-                error: 'Error',
+                default: 'Отправить',
+                pending: 'Сохранение...',
+                complete: 'Завершено',
+                error: 'Ошибка',
               }}
               icons={{
                 default: <Icon className="fa fa-download" />,

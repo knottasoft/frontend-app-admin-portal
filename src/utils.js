@@ -1,3 +1,4 @@
+// TODO: Lang support
 import moment from 'moment';
 import qs from 'query-string';
 import snakeCase from 'lodash/snakeCase';
@@ -9,7 +10,7 @@ import isNumeric from 'validator/lib/isNumeric';
 
 import { history } from '@edx/frontend-platform/initialize';
 
-const formatTimestamp = ({ timestamp, format = 'MMMM D, YYYY' }) => {
+const formatTimestamp = ({ timestamp, format = 'DD.MM.YYYY' }) => {
   if (timestamp) {
     return moment(timestamp).format(format);
   }
@@ -20,7 +21,7 @@ const formatPassedTimestamp = (timestamp) => {
   if (timestamp) {
     return formatTimestamp({ timestamp });
   }
-  return 'Has not passed';
+  return 'Не пройден';
 };
 
 const formatPercentage = ({ decimal, numDecimals = 1 }) => (
@@ -83,10 +84,10 @@ const isTriggerKey = ({ triggerKeys, action, key }) => (
 );
 
 // Validation functions
-const isRequired = (value = '') => (isEmpty(value) ? 'This field is required.' : undefined);
-const isValidEmail = (value = '') => (!isEmail(value) ? 'Must be a valid email address.' : undefined);
-const isValidNumber = (value = '') => (!isEmpty(value) && !isNumeric(value, { no_symbols: true }) ? 'Must be a valid number.' : undefined);
-const maxLength = max => value => (value && value.length > max ? 'Must be 512 characters or less' : undefined);
+const isRequired = (value = '') => (isEmpty(value) ? 'Это поле обязательно для заполнения.' : undefined);
+const isValidEmail = (value = '') => (!isEmail(value) ? 'Должен быть действующий адрес электронной почты.' : undefined);
+const isValidNumber = (value = '') => (!isEmpty(value) && !isNumeric(value, { no_symbols: true }) ? 'Должно быть действительное число.' : undefined);
+const maxLength = max => value => (value && value.length > max ? 'Должно быть не более 512 символов' : undefined);
 const maxLength512 = maxLength(512);
 
 /** camelCase <--> snake_case functions
@@ -168,7 +169,7 @@ const mergeErrors = (object, other) => {
 };
 
 const getSubscriptionContactText = (contactEmail) => {
-  let contactText = 'To learn more about your unlimited subscription and edX, contact your edX administrator';
+  let contactText = 'Чтобы узнать больше о вашей неограниченной подписке и платформе ЦОПП СК, обратитесь к администратору ЦОПП СК.';
   if (contactEmail) {
     contactText = `${contactText} at ${contactEmail}`;
   }

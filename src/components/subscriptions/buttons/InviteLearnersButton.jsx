@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
@@ -9,7 +10,7 @@ const InviteLearnersButton = ({ onSuccess, onClose }) => {
   const { overview, subscription } = useContext(SubscriptionDetailContext);
   return (
     <ActionButtonWithModal
-      buttonLabel="Invite learners"
+      buttonLabel="Пригласить обучающихся"
       buttonClassName="invite-learners-btn"
       variant="primary"
       renderModal={({ closeModal }) => (

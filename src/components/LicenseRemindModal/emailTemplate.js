@@ -1,10 +1,11 @@
+// TODO: Lang support
 import { getSubscriptionContactText } from '../../utils';
 
 const emailTemplate = {
-  greeting: 'We noticed you haven’t had a chance to start learning on edX!  It’s easy to get started and browse the course catalog.',
-  body: `{ENTERPRISE_NAME} partnered with edX to give everyone access to high-quality online courses. Start your subscription and browse courses in nearly every subject including Data Analytics, Digital Media, Business & Leadership, Communications, Computer Science and so much more. Courses are taught by experts from the world’s leading universities and corporations.
+  greeting: 'Мы заметили, что вы еще не успели начать учиться на платформе ЦОПП СК!  Начать обучение и просмотреть каталог курсов очень просто.',
+  body: `{ENTERPRISE_NAME} сотрудничает с ЦОПП СК, чтобы предоставить всем желающим доступ к высококачественным онлайн-курсам. Начните подписку и просмотрите курсы практически по всем предметам, включая аналитику данных, цифровые медиа, бизнес и лидерство, коммуникации, компьютерные науки и многое другое.
 
-Start learning: {LICENSE_ACTIVATION_LINK}
+Начните учиться: {LICENSE_ACTIVATION_LINK}
   `,
   closing: getSubscriptionContactText,
 };

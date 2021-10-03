@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 
 import TableContainer from '../../containers/TableContainer';
@@ -6,12 +7,12 @@ import EnterpriseDataApiService from '../../data/services/EnterpriseDataApiServi
 const CompletedLearnersTable = () => {
   const tableColumns = [
     {
-      label: 'Email',
+      label: 'Электронная почта',
       key: 'user_email',
       columnSortable: true,
     },
     {
-      label: 'Total Course Completed Count',
+      label: 'Всего пройденных курсов',
       key: 'completed_courses',
       columnSortable: true,
     },

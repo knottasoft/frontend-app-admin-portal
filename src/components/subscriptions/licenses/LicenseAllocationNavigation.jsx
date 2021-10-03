@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, { useContext } from 'react';
 import classNames from 'classnames';
 
@@ -20,19 +21,19 @@ const LicenseAllocationNavigation = () => {
   const tabs = [
     {
       key: TAB_ALL_USERS,
-      text: `All Users (${overview.assigned + overview.activated + overview.revoked})`,
+      text: `Все пользователи (${overview.assigned + overview.activated + overview.revoked})`,
     },
     {
       key: TAB_LICENSED_USERS,
-      text: `Licensed Users (${overview.activated})`,
+      text: `Лицензированные пользователи (${overview.activated})`,
     },
     {
       key: TAB_PENDING_USERS,
-      text: `Pending Users (${overview.assigned})`,
+      text: `Ожидающие пользователи (${overview.assigned})`,
     },
     {
       key: TAB_REVOKED_USERS,
-      text: `Revoked Users (${overview.revoked})`,
+      text: `Отозванные пользователи (${overview.revoked})`,
     },
   ];
 

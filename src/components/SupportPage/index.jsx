@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
@@ -27,9 +28,9 @@ class SupportPage extends React.Component {
     return (
       <>
         <Helmet>
-          <title>Contact Support</title>
+          <title>Служба поддержки</title>
         </Helmet>
-        <Hero title="Contact Support" />
+        <Hero title="Служба поддержки" />
         <div className="container-fluid">
           <div className="row my-3">
             <div className="col">
@@ -50,9 +51,9 @@ class SupportPage extends React.Component {
                 />
               ) : (
                 <p>
-                  For assistance, please contact the edX Customer Success team at
+                  Для получения помощи, пожалуйста, свяжитесь с командой ЦОПП СК по адресу
                   {' '}
-                  <MailtoLink to="customersuccess@edx.org">customersuccess@edx.org</MailtoLink>.
+                  <MailtoLink to="customersuccess@edx.org">support@copp26.ru</MailtoLink>.
                 </p>
               )}
             </div>

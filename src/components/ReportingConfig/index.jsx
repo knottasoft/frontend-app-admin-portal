@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Collapsible, Icon } from '@edx/paragon';
@@ -139,15 +140,15 @@ class ReportingConfig extends React.Component {
                         className={`col-1 ${config.active ? ' fa fa-check text-success-300' : ' fa fa-times text-danger-300'}`}
                       />
                       <div className="col">
-                        <h3 className="h6">Report Type:</h3>
+                        <h3 className="h6">Тип отчета:</h3>
                         <p>{config.data_type}</p>
                       </div>
                       <div className="col">
-                        <h3 className="h6">Delivery Method:</h3>
+                        <h3 className="h6">Способ доставки:</h3>
                         <p>{config.delivery_method}</p>
                       </div>
                       <div className="col">
-                        <h3 className="h6">Frequency:</h3>
+                        <h3 className="h6">Периодичность:</h3>
                         <p>{config.frequency}</p>
                       </div>
                     </div>
@@ -165,7 +166,7 @@ class ReportingConfig extends React.Component {
             ))}
             <Collapsible
               styling="basic"
-              title="Add a reporting configuration"
+              title="Добавьте конфигурацию отчетности"
               className="col justify-content-center align-items-center"
               ref={this.newConfigFormRef}
             >

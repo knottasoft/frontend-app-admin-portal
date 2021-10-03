@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, { createContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
@@ -36,9 +37,9 @@ export default function SubscriptionData({ children, enterpriseId }) {
     <StatusAlert
       className="mt-3"
       alertType={!hasSubscription ? 'danger' : ''}
-      message={!hasSubscription ? `Your organization does not have any active subscriptions to manage.
-      If you believe you are seeing this message in error,
-      please reach out to the edX Customer Success team at customersuccess@edx.org.` : ''}
+      message={!hasSubscription ? `У вашей организации нет активных подписок для управления.
+      Если вы считаете, что видите это сообщение ошибочно,
+      пожалуйста, свяжитесь с командой ЦОПП СК по адресу support@copp26.ru.` : ''}
     />
   );
 }

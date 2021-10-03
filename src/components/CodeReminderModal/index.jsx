@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, SubmissionError } from 'redux-form';
@@ -24,8 +25,8 @@ const REMINDER_EMAIL_TEMPLATE_FIELDS = {
 const REMIND_MODE = MODAL_TYPES.remind;
 
 const ERROR_MESSAGE_TITLES = {
-  [MODAL_TYPES.remind]: 'Could not send reminder email',
-  [MODAL_TYPES.save]: 'Could not save template',
+  [MODAL_TYPES.remind]: 'Не удалось отправить письмо с напоминанием',
+  [MODAL_TYPES.save]: 'Не удалось сохранить шаблон',
 };
 
 export class BaseCodeReminderModal extends React.Component {
@@ -226,7 +227,7 @@ export class BaseCodeReminderModal extends React.Component {
             >
               <>
                 {mode === REMIND_MODE && submitting && <Icon className="fa fa-spinner fa-spin mr-2" />}
-                Remind
+                Напомнить
               </>
             </Button>,
             <SaveTemplateButton
@@ -236,6 +237,7 @@ export class BaseCodeReminderModal extends React.Component {
               handleSubmit={handleSubmit}
             />,
           ]}
+          closeText="Отменить"
           onClose={onClose}
           open
         />

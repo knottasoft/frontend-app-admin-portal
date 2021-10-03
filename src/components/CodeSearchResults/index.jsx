@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TransitionReplace } from '@edx/paragon';
@@ -93,10 +94,10 @@ class CodeSearchResults extends React.Component {
               />
               <>
                 {isCodeReminderSuccessful && this.renderSuccessMessage({
-                  message: `A reminder was successfully sent to ${searchQuery}.`,
+                  message: `Напоминание было успешно отправлено на ${searchQuery}.`,
                 })}
                 {isCodeRevokeSuccessful && this.renderSuccessMessage({
-                  message: 'Successfully revoked code(s)',
+                  message: 'Успешно отозванный код(ы)',
                 })}
                 <CodeSearchResultsTable
                   searchQuery={searchQuery}

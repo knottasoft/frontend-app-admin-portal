@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -53,12 +54,12 @@ class Footer extends React.Component {
               <ul className="nav justify-content-end small">
                 <li className="nav-item border-right">
                   <a className="nav-link px-2" href="https://www.edx.org/edx-terms-service">
-                    Terms of Service
+                    Условия оказания услуг
                   </a>
                 </li>
                 <li className="nav-item border-right">
                   <a className="nav-link px-2" href="https://www.edx.org/edx-privacy-policy">
-                    Privacy Policy
+                    Политика конфиденциальности
                   </a>
                 </li>
                 <li className="nav-item">
@@ -67,7 +68,7 @@ class Footer extends React.Component {
                     to={{ pathname: configuration.ENTERPRISE_SUPPORT_URL }}
                     target="_blank"
                   >
-                    Support
+                    Поддержка
                   </Link>
                 </li>
               </ul>

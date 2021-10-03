@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -12,6 +13,8 @@ import { TAB_ALL_USERS, TAB_PENDING_USERS } from './data/constants';
 import InviteLearnersButton from './buttons/InviteLearnersButton';
 import { SubscriptionContext } from './SubscriptionData';
 import { ToastsContext } from '../Toasts';
+
+import { injectIntl, FormattedDate } from '@edx/frontend-platform/i18n';
 
 const SubscriptionDetails = ({ enterpriseSlug }) => {
   const { forceRefresh } = useContext(SubscriptionContext);
@@ -29,7 +32,7 @@ const SubscriptionDetails = ({ enterpriseSlug }) => {
           <Link to={`/${enterpriseSlug}/admin/subscriptions`}>
             <Button variant="outline-primary">
               <FontAwesomeIcon icon={faAngleLeft} className="mr-2" />
-              Back to subscriptions
+              Назад к подпискам
             </Button>
           </Link>
         </Row>
@@ -43,7 +46,7 @@ const SubscriptionDetails = ({ enterpriseSlug }) => {
                 <InviteLearnersButton
                   onSuccess={({ numAlreadyAssociated, numSuccessfulAssignments }) => {
                     forceRefresh();
-                    addToast(`${numAlreadyAssociated} email addresses were previously assigned. ${numSuccessfulAssignments} email addresses were successfully added.`);
+                    addToast(`${numAlreadyAssociated} адреса электронной почты были назначены ранее. ${numSuccessfulAssignments} адреса электронной почты были успешно добавлены.`);
                     setActiveTab(TAB_PENDING_USERS);
                   }}
                 />
@@ -53,18 +56,18 @@ const SubscriptionDetails = ({ enterpriseSlug }) => {
           <div className="mt-3 d-flex align-items-center">
             <div className="mr-5">
               <div className="text-uppercase text-muted">
-                <small>Start Date</small>
+                <small>Дата начала</small>
               </div>
               <div className="lead">
-                {moment(subscription?.startDate).format('MMMM D, YYYY')}
+                < FormattedDate value={moment(subscription?.startDate).format('MMMM D, YYYY')} />
               </div>
             </div>
             <div>
               <div className="text-uppercase text-muted">
-                <small>End Date</small>
+                <small>Дата окончания</small>
               </div>
               <div className="lead">
-                {moment(subscription?.expirationDate).format('MMMM D, YYYY')}
+                <FormattedDate value={moment(subscription?.expirationDate).format('MMMM D, YYYY')} />
               </div>
             </div>
           </div>
@@ -82,4 +85,4 @@ const mapStateToProps = state => ({
   enterpriseSlug: state.portalConfiguration.enterpriseSlug,
 });
 
-export default connect(mapStateToProps)(SubscriptionDetails);
+export default connect(mapStateToProps)(injectIntl(SubscriptionDetails));

@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 
 import TableContainer from '../../containers/TableContainer';
@@ -7,17 +8,17 @@ import { formatTimestamp } from '../../utils';
 const PastWeekPassedLearnersTable = () => {
   const tableColumns = [
     {
-      label: 'Email',
+      label: 'Электронная почта',
       key: 'user_email',
       columnSortable: true,
     },
     {
-      label: 'Course Title',
+      label: 'Название курса',
       key: 'course_title',
       columnSortable: true,
     },
     {
-      label: 'Passed Date',
+      label: 'Дата прохождения',
       key: 'passed_timestamp',
       columnSortable: true,
     },

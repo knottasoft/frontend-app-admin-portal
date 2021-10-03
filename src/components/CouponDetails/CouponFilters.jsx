@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -8,7 +9,7 @@ const CouponFilters = ({
 }) => (
   <Form.Group controlId="codeStatus" name="table-view">
     <Form.Control
-      floatingLabel="Filter by code status"
+      floatingLabel="Фильтр по состоянию кода"
       as="select"
       onChange={(e) => handleToggleSelect(e.target.value)}
       disabled={isTableLoading}

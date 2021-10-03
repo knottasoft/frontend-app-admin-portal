@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Input, ValidationFormGroup } from '@edx/paragon';
@@ -11,11 +12,11 @@ const SFTPDeliveryMethodForm = ({ invalidFields, config, handleBlur }) => {
         <div className="col">
           <ValidationFormGroup
             for="sftpHostname"
-            helpText="The host to deliver the report too"
-            invalidMessage="Required. Hostname cannot be blank"
+            helpText="Хост, который должен получить отчет."
+            invalidMessage="Требуется. Имя хоста не может быть пустым"
             invalid={invalidFields.sftpHostname}
           >
-            <label htmlFor="sftpHostname">SFTP Hostname</label>
+            <label htmlFor="sftpHostname">Имя хоста SFTP</label>
             <Input
               type="text"
               id="sftpHostname"
@@ -29,11 +30,11 @@ const SFTPDeliveryMethodForm = ({ invalidFields, config, handleBlur }) => {
         <div className="col col-2">
           <ValidationFormGroup
             for="sftpPort"
-            helpText="The port the sftp host connects too"
+            helpText="Порт подключения sftp-хоста."
             invalid={invalidFields.sftpPort}
-            invalidMessage="Required. Must be a valid port"
+            invalidMessage="Требуется. Должен быть действительным портом"
           >
-            <label htmlFor="sftpPort">SFTP Port</label>
+            <label htmlFor="sftpPort">SFTP порт</label>
             <Input
               type="number"
               id="sftpPort"
@@ -48,11 +49,11 @@ const SFTPDeliveryMethodForm = ({ invalidFields, config, handleBlur }) => {
         <div className="col">
           <ValidationFormGroup
             for="sftpUsername"
-            helpText="the username to securely access the host"
-            invalidMessage="Required. Username cannot be blank"
+            helpText="имя пользователя для безопасного доступа к хосту"
+            invalidMessage="Требуется. Имя пользователя не может быть пустым"
             invalid={invalidFields.sftpUsername}
           >
-            <label htmlFor="sftpUsername">SFTP Username</label>
+            <label htmlFor="sftpUsername">Имя пользователя SFTP</label>
             <Input
               type="text"
               id="sftpUsername"
@@ -64,7 +65,7 @@ const SFTPDeliveryMethodForm = ({ invalidFields, config, handleBlur }) => {
           </ValidationFormGroup>
           {config && (
             <div className="form-group">
-              <label htmlFor="changePassword">Change Password</label>
+              <label htmlFor="changePassword">Сменить пароль</label>
               <Input
                 type="checkbox"
                 id="changePassword"
@@ -76,11 +77,11 @@ const SFTPDeliveryMethodForm = ({ invalidFields, config, handleBlur }) => {
           )}
           <ValidationFormGroup
             for="encryptedSftpPassword"
-            helpText="The password to use to securely access the host. The password will be encrypted when stored in the database"
+            helpText="Пароль, используемый для безопасного доступа к хосту. Пароль будет зашифрован при хранении в базе данных"
             invalid={invalidFields.encryptedSftpPassword}
-            invalidMessage="Required. Password must not be blank"
+            invalidMessage="Требуется. Пароль не должен быть пустым"
           >
-            <label htmlFor="encryptedSftpPassword">SFTP Password</label>
+            <label htmlFor="encryptedSftpPassword">Пароль SFTP</label>
             <Input
               type="password"
               id="encryptedSftpPassword"
@@ -92,11 +93,11 @@ const SFTPDeliveryMethodForm = ({ invalidFields, config, handleBlur }) => {
           </ValidationFormGroup>
           <ValidationFormGroup
             for="sftpFilePath"
-            helpText="The path on the host to deliver the report too"
+            helpText="Путь на хосте для доставки отчета."
             invalid={invalidFields.sftpFilePath}
             invalidMessage="Required"
           >
-            <label htmlFor="sftpFilePath">SFTP File Path</label>
+            <label htmlFor="sftpFilePath">Путь к файлу SFTP</label>
             <Input
               type="text"
               id="sftpFilePath"

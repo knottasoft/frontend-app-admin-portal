@@ -1,3 +1,4 @@
+ // TODO: Lang support
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
@@ -27,7 +28,7 @@ function configFormReducer(state, action) {
         ...state,
         submitState: SUBMIT_STATES.ERROR,
         invalidFields: action.value,
-        error: 'Form could not be submitted as there are fields with invalid values. Please correct them below.',
+        error: 'Форма не может быть отправлена, так как есть поля с недопустимыми значениями. Пожалуйста, исправьте их ниже.',
       };
     }
     case 'COMPLETE': {
@@ -155,7 +156,7 @@ function CornerstoneIntegrationConfigForm({ enterpriseId, config }) {
         <StatusAlert
           alertType="danger"
           iconClassName="fa fa-times-circle"
-          title="Unable to submit config form:"
+          title="Неудается отправить форму конфигурации:"
           message={state.error}
           dismissible
         />
@@ -182,7 +183,7 @@ function CornerstoneIntegrationConfigForm({ enterpriseId, config }) {
           <ValidationFormGroup
             for="active"
           >
-            <label htmlFor="active">Active</label>
+            <label htmlFor="active">Активно</label>
             <Input
               type="checkbox"
               id="active"
@@ -199,10 +200,10 @@ function CornerstoneIntegrationConfigForm({ enterpriseId, config }) {
           <ValidationFormGroup
             for="cornerstoneBaseUrl"
             invalid={state.invalidFields.cornerstoneBaseUrl}
-            invalidMessage="Cornerstone Instance URL is required."
-            helpText="Your Cornerstone instance URL. Make sure to include the protocol (ie https/http)"
+            invalidMessage="Требуется URL-адрес экземпляра Cornerstone."
+            helpText="URL-адрес вашего экземпляра Cornerstone. Обязательно укажите протокол (т.е. https/http)."
           >
-            <label htmlFor="cornerstoneBaseUrl">Cornerstone Instance URL</label>
+            <label htmlFor="cornerstoneBaseUrl">URL-адрес экземпляра Cornerstone</label>
             <Input
               type="text"
               id="cornerstoneBaseUrl"
@@ -221,10 +222,10 @@ function CornerstoneIntegrationConfigForm({ enterpriseId, config }) {
             type="submit"
             id="submitButton"
             labels={{
-              default: 'Submit',
-              pending: 'Saving...',
-              complete: 'Complete',
-              error: 'Error',
+              default: 'Отправить',
+              pending: 'Сохранение...',
+              complete: 'Завершено',
+              error: 'Ошибка',
             }}
             icons={{
               default: <Icon className="fa fa-download" />,

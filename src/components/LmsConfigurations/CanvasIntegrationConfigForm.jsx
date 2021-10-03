@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
@@ -99,7 +100,7 @@ class CanvasIntegrationConfigForm extends React.Component {
           <StatusAlert
             alertType="danger"
             iconClassName="fa fa-times-circle"
-            title="Unable to submit config form:"
+            title="Неудается отправить форму конфигурации:"
             message={error}
           />
         </div>
@@ -120,7 +121,7 @@ class CanvasIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="active"
             >
-              <label htmlFor="active">Active</label>
+              <label htmlFor="active">Активно</label>
               <Input
                 type="checkbox"
                 id="active"
@@ -138,9 +139,9 @@ class CanvasIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="clientId"
               invalid={invalidFields.clientId}
-              invalidMessage="Required. Client Id must not be blank"
+              invalidMessage="Требуется. Идентификатор клиента не должен быть пустым"
             >
-              <label htmlFor="clientId">API Client Id</label>
+              <label htmlFor="clientId">Идентификатор клиента API</label>
               <Input
                 type="text"
                 id="clientId"
@@ -158,9 +159,9 @@ class CanvasIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="clientSecret"
               invalid={invalidFields.clientSecret}
-              invalidMessage="Required. Client Secret must not be blank"
+              invalidMessage="Требуется. Секрет клиента не должен быть пустым"
             >
-              <label htmlFor="clientSecret">API Client Secret</label>
+              <label htmlFor="clientSecret">Секрет клиента API</label>
               <Input
                 type="text"
                 id="clientSecret"
@@ -178,9 +179,9 @@ class CanvasIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="canvasAccountId"
               invalid={invalidFields.canvasAccountId}
-              invalidMessage="Required. Canvas Account Id must not be blank"
+              invalidMessage="Требуется. Canvas Account Id не должен быть пустым"
             >
-              <label htmlFor="canvasAccountId">Canvas Account Id</label>
+              <label htmlFor="canvasAccountId">Идентификатор учетной записи Canvas</label>
               <Input
                 type="number"
                 id="canvasAccountId"
@@ -198,9 +199,9 @@ class CanvasIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="canvasBaseUrl"
               invalid={invalidFields.canvasBaseUrl}
-              invalidMessage="Required. Canvas Base URL must not be blank"
+              invalidMessage="Требуется. Адрес Canvas Base URL не должен быть пустым"
             >
-              <label htmlFor="canvasBaseUrl">Canvas Base URL</label>
+              <label htmlFor="canvasBaseUrl">Базовый URL Canvas</label>
               <Input
                 type="text"
                 id="canvasBaseUrl"
@@ -221,10 +222,10 @@ class CanvasIntegrationConfigForm extends React.Component {
               type="submit"
               id="submitButton"
               labels={{
-                default: 'Submit',
-                pending: 'Saving...',
-                complete: 'Complete',
-                error: 'Error',
+                default: 'Отправить',
+                pending: 'Сохранение',
+                complete: 'Завершено',
+                error: 'Ошибка',
               }}
               icons={{
                 default: <Icon className="fa fa-download" />,

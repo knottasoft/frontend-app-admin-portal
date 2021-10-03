@@ -1,9 +1,10 @@
+// TODO: Lang support
 const emailTemplate = {
-  subject: 'edX Course Assignment Revoked',
+  subject: 'Назначение курса отменено',
   greeting: '',
-  body: 'Your Learning Manager has revoked access code {CODE} and it is no longer assigned to your edX account {USER_EMAIL}.',
+  body: 'Ваш менеджер по обучению отозвал код доступа {CODE}, и он больше не присвоен вашей учетной записи {USER_EMAIL}.',
   closing: `
-For any questions, please reach out to your Learning Manager.`,
+По всем вопросам обращайтесь к своему менеджеру по обучению.`,
 };
 
 export default emailTemplate;

@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -29,20 +30,20 @@ const SubscriptionExpiredModal = ({
       <ModalDialog.Body>
         <Img className="w-25 my-5 mx-auto d-block" src={configuration.LOGO_URL} alt="edX logo" />
         <p>
-          This subscription cohort expired on <b>{formatTimestamp({ timestamp: expirationDate })}</b>.
+          Срок действия этой когорты подписчиков истек <b>{formatTimestamp({ timestamp: expirationDate })}</b>.
           {' '}
-          To make changes to this cohort, contact edX to reactivate your subscription.
+          Чтобы внести изменения в эту когорту, свяжитесь с ЦОПП СК для повторной активации подписки.
         </p>
-        <p>What to do next?</p>
+        <p>Что делать дальше?</p>
         <ul>
           <li>
-            To reactivate your subscription, please contact the edX Customer Success team at
+            Чтобы возобновить подписку, пожалуйста, свяжитесь с командой ЦОПП СК по адресу
             {' '}
-            <MailtoLink to="customersuccess@edx.org">customersuccess@edx.org</MailtoLink>
+            <MailtoLink to="customersuccess@edx.org">support@copp26.ru</MailtoLink>
           </li>
           {enableCodeManagementScreen && (
             <li>
-              Manage your codes in the <Link to={`/${enterpriseSlug}/admin/coupons`}>code management page</Link>
+              Управляйте своими кодами на <Link to={`/${enterpriseSlug}/admin/coupons`}>странице управления кодами</Link>
             </li>
           )}
         </ul>

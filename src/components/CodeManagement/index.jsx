@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -14,6 +15,9 @@ import SearchBar from '../SearchBar';
 import CodeSearchResults from '../CodeSearchResults';
 
 import { updateUrl } from '../../utils';
+
+import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import messages from './CodeManagement.messages';
 
 class CodeManagement extends React.Component {
   constructor(props) {
@@ -167,19 +171,20 @@ class CodeManagement extends React.Component {
   }
 
   renderErrorMessage() {
+    const { intl } = this.props;
     return (
       <StatusAlert
         className="mt-3"
         alertType="danger"
         iconClassName="fa fa-times-circle"
-        title="Unable to load coupons"
-        message={`Try refreshing your screen (${this.props.error.message})`}
+        title={intl.formatMessage(messages['code.management.alert.error.title'])}
+        message={intl.formatMessage(messages['code.management.alert.error.message'], {message: this.props.error.message})}
       />
     );
   }
 
   renderCoupons() {
-    const { coupons, location } = this.props;
+    const { coupons, location, intl } = this.props;
     const queryParams = qs.parse(location.search);
 
     return (
@@ -203,7 +208,7 @@ class CodeManagement extends React.Component {
             })}
             pageCount={coupons.num_pages}
             currentPage={coupons.current_page}
-            paginationLabel="coupons pagination"
+            paginationLabel={intl.formatMessage(messages['code.management.coupon.pagination.label'])}
           />
         </div>
       </>
@@ -211,24 +216,28 @@ class CodeManagement extends React.Component {
   }
 
   renderRequestCodesSuccessMessage() {
+    const { intl } = this.props;
+
     return (
       <StatusAlert
         className="mt-3"
         alertType="success"
         iconClassName="fa fa-check-circle"
-        title="Request for more codes received"
-        message="The edX Customer Success team will contact you soon."
+        title={intl.formatMessage(messages['code.management.alert.request-codes.title'])}
+        message={intl.formatMessage(messages['code.management.alert.request-codes.message'])}
         dismissible
       />
     );
   }
 
   renderEmptyDataMessage() {
+    const { intl } = this.props;
+
     return (
       <StatusAlert
         alertType="warning"
         iconClassName="fa fa-exclamation-circle"
-        message="There are no results."
+        message={intl.formatMessage(messages['code.management.alert.no-results.message'])}
       />
     );
   }
@@ -239,25 +248,26 @@ class CodeManagement extends React.Component {
       error,
       loading,
       match,
+      intl,
     } = this.props;
     const { hasRequestedCodes, searchQuery } = this.state;
     const hasSearchQuery = !!searchQuery;
     return (
       <>
         <Helmet>
-          <title>Code Management</title>
+          <title>{intl.formatMessage(messages['code.management.helmet'])}</title>
         </Helmet>
         <main role="main">
-          <Hero title="Code Management" />
+          <Hero title={intl.formatMessage(messages['code.management.hero'])} />
           <div className="container-fluid">
             {hasRequestedCodes && this.renderRequestCodesSuccessMessage()}
             <div className="row mt-4 mb-3 no-gutters">
               <div className="col-12 col-xl-3 mb-3 mb-xl-0">
-                <h2>Overview</h2>
+                <h2>{intl.formatMessage(messages['code.management.overview.title'])}</h2>
               </div>
               <div className="col-12 col-xl-4 mb-3 mb-xl-0">
                 <SearchBar
-                  placeholder="Search by email or code..."
+                  placeholder={intl.formatMessage(messages['code.management.overview.search.placeholder'])}
                   onSearch={(query) => {
                     this.setState({ searchQuery: query });
                     this.removeQueryParams(['coupon_id', 'page']);
@@ -279,7 +289,7 @@ class CodeManagement extends React.Component {
                 >
                   <>
                     <Icon className="fa fa-refresh mr-2" />
-                    Refresh data
+                    {intl.formatMessage(messages['code.management.overview.button.refresh'])}
                   </>
                 </Button>
                 <Link
@@ -288,7 +298,7 @@ class CodeManagement extends React.Component {
                 >
                   <>
                     <Icon className="fa fa-plus mr-2" />
-                    Request more codes
+                    {intl.formatMessage(messages['code.management.overview.link.request-more'])}
                   </>
                 </Link>
               </div>
@@ -335,6 +345,7 @@ CodeManagement.defaultProps = {
 };
 
 CodeManagement.propTypes = {
+  intl: intlShape.isRequired,
   fetchCouponOrders: PropTypes.func.isRequired,
   clearCouponOrders: PropTypes.func.isRequired,
   location: PropTypes.shape({
@@ -360,4 +371,4 @@ CodeManagement.propTypes = {
   error: PropTypes.instanceOf(Error),
 };
 
-export default CodeManagement;
+export default injectIntl(CodeManagement);

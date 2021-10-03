@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, { useContext, useState } from 'react';
 import { StatefulButton } from '@edx/paragon';
 import { faCheck, faDownload, faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -43,9 +44,9 @@ const DownloadCsvButton = () => {
       state={buttonState}
       variant="outline-primary"
       labels={{
-        default: 'Download CSV',
-        pending: 'Downloading',
-        complete: 'Downloaded',
+        default: 'Скачать CSV',
+        pending: 'Скачивание',
+        complete: 'Скачано',
       }}
       icons={{
         default: <FontAwesomeIcon icon={faDownload} />,

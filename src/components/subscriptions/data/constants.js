@@ -1,3 +1,4 @@
+// TODO: Lang support
 export const TAB_ALL_USERS = 'TAB_ALL_USERS';
 export const TAB_LICENSED_USERS = 'TAB_LICENSED_USERS';
 export const TAB_PENDING_USERS = 'TAB_PENDING_USERS';
@@ -18,11 +19,11 @@ export const licenseStatusByTab = {
   [TAB_REVOKED_USERS]: REVOKED,
 };
 
-export const SUBSCRIPTIONS = 'Subscriptions';
-export const SUBSCRIPTION_USERS = 'Subscription Users';
-export const SUBSCRIPTION_USERS_OVERVIEW = 'Subscription Users Overview';
+export const SUBSCRIPTIONS = 'Подписки';
+export const SUBSCRIPTION_USERS = 'Пользователи подписки';
+export const SUBSCRIPTION_USERS_OVERVIEW = 'Обзор пользователей подписки';
 
-export const NETWORK_ERROR_MESSAGE = 'Error occurred while loading the data.';
+export const NETWORK_ERROR_MESSAGE = 'Произошла ошибка при загрузке данных.';
 export const DEFAULT_PAGE = 1;
 
 // used to determine whether to show the revocation cap messaging in the license revoke modal
@@ -37,4 +38,4 @@ export const SUBSCRIPTION_DAYS_REMAINING_EXCEPTIONAL = 30;
 export const SEEN_SUBSCRIPTION_EXPIRATION_MODAL_COOKIE_PREFIX = 'seen-expiration-modal-';
 
 // Multiple subscription picker
-export const DEFAULT_LEAD_TEXT = 'Invite your learners to access your course catalog and manage your subscription cohorts';
+export const DEFAULT_LEAD_TEXT = 'Приглашайте своих обучающихся для доступа к каталогу курсов и управления когортами подписчиков';

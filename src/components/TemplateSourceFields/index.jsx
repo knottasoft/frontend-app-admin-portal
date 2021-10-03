@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -14,9 +15,9 @@ import {
 } from '../../data/constants/emailTemplate';
 import ReduxFormSelect from '../ReduxFormSelect';
 
-export const TEMPLATE_SOURCE_BUTTON_ARIA_LABEL = 'Press the button to select the template source';
+export const TEMPLATE_SOURCE_BUTTON_ARIA_LABEL = 'Нажмите кнопку , чтобы выбрать источник шаблона';
 export const TEMLATE_SOURCE_FIELDS_TEST_ID = 'template-source-fields';
-const TEMPLATE_NAME_LABEL = 'Template name';
+const TEMPLATE_NAME_LABEL = 'Имя шаблона';
 
 class TemplateSourceFields extends React.Component {
   constructor(props) {
@@ -118,8 +119,8 @@ class TemplateSourceFields extends React.Component {
             placement="top"
             overlay={(
               <Tooltip id="tooltip-top">
-                Create new code assignment message. If you’d like to save the message as a
-                template for future use, click “Save Template” before you “Assign Code”.
+                Создайте новое сообщение о присвоении кода. Если вы хотите сохранить сообщение в качестве шаблона
+                для дальнейшего использования, нажмите "Сохранить шаблон" перед "Присвоить код".
               </Tooltip>
             )}
           >
@@ -134,7 +135,7 @@ class TemplateSourceFields extends React.Component {
                 }}
                 aria-pressed={emailTemplateSource === newEmail ? 'true' : 'false'}
                 onClick={() => this.updateState(newEmail)}
-              >New Email
+              >Новая электронная почта
               </Button>
             </span>
           </OverlayTrigger>
@@ -144,8 +145,8 @@ class TemplateSourceFields extends React.Component {
             placement="top"
             overlay={(
               <Tooltip id="tooltip-top">
-                Make code assignment easier by loading any existing templates you have made here.
-                Just click the dropdown on Template Name.
+                Упростите назначение кода, загрузив сюда все созданные вами шаблоны.
+                Просто щелкните выпадающий список Имя шаблона.
               </Tooltip>
             )}
           >
@@ -160,7 +161,7 @@ class TemplateSourceFields extends React.Component {
                 }}
                 aria-pressed={emailTemplateSource === fromTemplate ? 'true' : 'false'}
                 onClick={() => this.updateState(fromTemplate)}
-              >From Template
+              >Из шаблона
               </Button>
             </span>
           </OverlayTrigger>

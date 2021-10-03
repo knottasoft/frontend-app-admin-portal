@@ -1,18 +1,18 @@
+// TODO: Lang support
 const emailTemplate = {
-  subject: 'New edX course assignment',
-  greeting: `Your Learning Manager has provided you with an access code to take a course at edX.
+  subject: "Напоминание о назначении курса",
+  greeting: `Ваш менеджер по обучению предоставил вам код доступа для прохождения курса.
 `,
-  body: `You may redeem this code for {REDEMPTIONS_REMAINING} course(s).
+  body: `Вы можете использовать этот код для {REDEMPTIONS_REMAINING} курса(ов).
 
-edX Login: {USER_EMAIL}
-Access Code: {CODE}
-Code Expiration Date: {EXPIRATION_DATE}
+Вход в систему: {USER_EMAIL}
+Код доступа: {CODE}
+Срок действия кода: {EXPIRATION_DATE}
 `,
-  closing: `
-  If your organization uses a branded learner portal, this code will be automatically applied to your account and can be redeemed for any available course.
-  If your organization does not have a branded learner portal, you can insert the access code at checkout under "coupon code" for applicable courses.
+  closing: `Если ваша организация использует фирменный портал для обучающихся, этот код будет автоматически применен к вашей учетной записи и может быть использован для любого доступного курса.
+Если у вашей организации нет фирменного портала для учащихся, вы можете вставить код доступа при оформлении заказа в поле "код купона" для соответствующих курсов.
 
-For any questions, please reach out to your Learning Manager.`,
+По всем вопросам обращайтесь к своему менеджеру по обучению.`,
 };
 
 export default emailTemplate;

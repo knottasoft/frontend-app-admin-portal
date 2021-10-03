@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
@@ -123,7 +124,7 @@ class SuccessFactorsIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="active"
             >
-              <label htmlFor="active">Active</label>
+              <label htmlFor="active">Активно</label>
               <Input
                 type="checkbox"
                 id="active"
@@ -140,10 +141,10 @@ class SuccessFactorsIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="sapsfBaseUrl"
               invalid={invalidFields.sapsfBaseUrl}
-              invalidMessage="SAP Success Factors Instance URL is required."
-              helpText="Your SAP Success Factors instance URL. Make sure to include the protocol (ie https/http)"
+              invalidMessage="Требуется URL-адрес экземпляра SAP Success Factors."
+              helpText="URL-адрес вашего экземпляра SAP Success Factors. Обязательно укажите протокол (т. е. https/http)."
             >
-              <label htmlFor="sapsfBaseUrl">SAP Success Factors Instance URL</label>
+              <label htmlFor="sapsfBaseUrl">URL экземпляра SAP Success Factors</label>
               <Input
                 type="text"
                 id="sapsfBaseUrl"
@@ -158,10 +159,10 @@ class SuccessFactorsIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="sapsfCompanyId"
               invalid={invalidFields.sapsfCompanyId}
-              invalidMessage="SAP Success Factors Company Id field is required."
-              helpText="This should match the Company Id as found in SAP Success Factors."
+              invalidMessage="Поле Идентификатор компании SAP Success Factors является обязательным."
+              helpText="Это должно соответствовать идентификатору компании, который содержится в SAP Success Factors."
             >
-              <label htmlFor="sapsfCompanyId">SAP Success Factors Company Id</label>
+              <label htmlFor="sapsfCompanyId">Идентификатор компании SAP Success Factors</label>
               <Input
                 type="text"
                 id="sapsfCompanyId"
@@ -177,10 +178,10 @@ class SuccessFactorsIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="key"
               invalid={invalidFields.key}
-              invalidMessage="Success Factors' Client Id is required."
-              helpText="Oauth client identifier."
+              invalidMessage="Требуется идентификатор клиента Success Factors."
+              helpText="Идентификатор клиента Oauth."
             >
-              <label htmlFor="key">Client Id</label>
+              <label htmlFor="key">Идентификатор клиента</label>
               <Input
                 type="text"
                 id="key"
@@ -196,10 +197,10 @@ class SuccessFactorsIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="secret"
               invalid={invalidFields.key}
-              invalidMessage="Success Factors' Client Secret is required."
-              helpText="OAuth client secret."
+              invalidMessage="Требуется Секрет клиента Success Factors."
+              helpText="Секрет клиента OAuth."
             >
-              <label htmlFor="secret">Client Secret</label>
+              <label htmlFor="secret">Секрет клиента</label>
               <Input
                 type="password"
                 id="secret"
@@ -215,10 +216,10 @@ class SuccessFactorsIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="sapsfUserId"
               invalid={invalidFields.sapsfUserId}
-              invalidMessage="Success Factors' User Id is required."
-              helpText="Success Factors user identifier"
+              invalidMessage="Требуется идентификатор пользователя Success Factors."
+              helpText="Идентификатор пользователя Success Factors"
             >
-              <label htmlFor="secret">SAP Success Factors User Id</label>
+              <label htmlFor="secret">Идентификатор пользователя SAP Success Factors</label>
               <Input
                 type="text"
                 id="sapsfUserId"
@@ -234,19 +235,19 @@ class SuccessFactorsIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="userType"
               invalid={invalidFields.userType}
-              invalidMessage="Success Factors' User Type is required."
-              helpText="Type of SAP User (admin or user)."
+              invalidMessage="Тип пользователя Success Factors является обязательным."
+              helpText="Тип пользователя SAP (администратор или пользователь)."
             >
-              <label htmlFor="userType">SAP Success Factors User Type</label>
+              <label htmlFor="userType">Тип пользователя SAP Success Factors</label>
               <Input
                 type="select"
                 id="userType"
                 name="userType"
                 defaultValue={config ? config.userType : null}
                 options={[
-                  { value: 'admin', label: 'Admin' },
-                  { value: 'user', label: 'User' },
-                  { value: null, label: 'blank', hidden: true },
+                  { value: 'admin', label: 'Админ' },
+                  { value: 'user', label: 'Пользователь' },
+                  { value: null, label: 'пусто', hidden: true },
                 ]}
               />
             </ValidationFormGroup>
@@ -256,9 +257,9 @@ class SuccessFactorsIntegrationConfigForm extends React.Component {
           <div className="col col-6">
             <ValidationFormGroup
               for="transmitTotalHours"
-              helpText="Include totalHours in the transmitted completion data"
+              helpText="Включить totalHours в передаваемые данные о завершении работы"
             >
-              <label htmlFor="transmitTotalHours">Transmit Total Hours?</label>
+              <label htmlFor="transmitTotalHours">Передать общее количество часов?</label>
               <Input
                 type="checkbox"
                 id="transmitTotalHours"
@@ -275,9 +276,9 @@ class SuccessFactorsIntegrationConfigForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="additionalLocales"
-              helpText="A comma separated list of any additional locales used in SAP (such as 'Dutch' or 'English Canadian'). See SAP's documentation for more examples."
+              helpText="Список дополнительных локалей, используемых в SAP (например, 'Dutch' или 'English Canadian'), разделенный запятой. Дополнительные примеры см. в документации SAP."
             >
-              <label htmlFor="additionalLocales">Additional Locales</label>
+              <label htmlFor="additionalLocales">Дополнительные локализации</label>
               <Input
                 type="text"
                 id="additionalLocales"
@@ -296,10 +297,10 @@ class SuccessFactorsIntegrationConfigForm extends React.Component {
               type="submit"
               id="submitButton"
               labels={{
-                default: 'Submit',
-                pending: 'Saving...',
-                complete: 'Complete',
-                error: 'Error',
+                default: 'Отправить',
+                pending: 'Сохранение...',
+                complete: 'Завершено',
+                error: 'Ошибка',
               }}
               icons={{
                 default: <Icon className="fa fa-download" />,
@@ -320,7 +321,7 @@ class SuccessFactorsIntegrationConfigForm extends React.Component {
                 <StatusAlert
                   alertType="danger"
                   iconClassName="fa fa-times-circle"
-                  title="Unable to submit config form:"
+                  title="Неудается отправить форму конфигурации:"
                   message={error}
                 />
               </div>

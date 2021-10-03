@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, { useContext, useEffect, useMemo } from 'react';
 import {
   Alert,
@@ -27,15 +28,15 @@ import SubscriptionZeroStateMessage from '../SubscriptionZeroStateMessage';
 
 const columns = [
   {
-    label: 'Email address',
+    label: 'Адрес электронной почты',
     key: 'emailAddress',
   },
   {
-    label: 'Status',
+    label: 'Статус',
     key: 'status',
   },
   {
-    label: 'Actions',
+    label: 'Действия',
     key: 'actions',
   },
 ];
@@ -78,27 +79,27 @@ const LicenseManagementTabContentTable = () => {
     switch (activeTab) {
       case TAB_ALL_USERS:
         return {
-          title: 'All Users',
-          paginationLabel: 'pagination for all users',
-          noResultsLabel: 'There are no Pending, Activated or Revoked users',
+          title: 'Все пользователи',
+          paginationLabel: 'пагинация для всех пользователей',
+          noResultsLabel: 'Нет пользователей, находящихся на рассмотрении, активированных или отозванных',
         };
       case TAB_PENDING_USERS:
         return {
-          title: 'Pending Users',
-          paginationLabel: 'pagination for pending users',
-          noResultsLabel: 'There are no pending users',
+          title: 'Ожидающие пользователи',
+          paginationLabel: 'пагинация для ожидающих пользователей',
+          noResultsLabel: 'Нет ожидающих пользователей',
         };
       case TAB_LICENSED_USERS:
         return {
-          title: 'Licensed Users',
-          paginationLabel: 'pagination for licensed users',
-          noResultsLabel: 'There are no licensed users',
+          title: 'Лицензированные пользователи',
+          paginationLabel: 'пагинация для лицензированных пользователей',
+          noResultsLabel: 'Нет лицензированных пользователей',
         };
       case TAB_REVOKED_USERS:
         return {
-          title: 'Revoked Users',
-          paginationLabel: 'pagination for revoked users',
-          noResultsLabel: 'There are no revoked users',
+          title: 'Отозванные пользователи',
+          paginationLabel: 'пагинация для отозванных пользователей',
+          noResultsLabel: 'Нет отозванных пользователей',
         };
       default:
         return null;
@@ -127,7 +128,7 @@ const LicenseManagementTabContentTable = () => {
             pendingUsersCount={overview.assigned}
             isBulkRemind
             onSuccess={() => {
-              addToast('Reminders successfully sent');
+              addToast('Напоминания успешно отправлены');
               forceRefresh();
             }}
             subscriptionUUID={subscription.uuid}
@@ -144,8 +145,8 @@ const LicenseManagementTabContentTable = () => {
           variant="danger"
         >
           <Icon src={Error} className="alert-icon" />
-          <Alert.Heading>Unable to load data for {title}</Alert.Heading>
-          <p>Try refreshing your screen ({message})</p>
+          <Alert.Heading>Невозможно загрузить данные для {title}</Alert.Heading>
+          <p>Попробуйте обновить экран ({message})</p>
         </Alert>
       ))}
       {!hasErrors && hasLoadedUsers && (
@@ -162,11 +163,11 @@ const LicenseManagementTabContentTable = () => {
                     onClose={closeRevocationLimitAlert}
                     dismissible
                   >
-                    You have reached your revoke access limit. For help
-                    managing your subscription licenses,
+                    Вы достигли лимита отзыва доступа. Для получения помощи
+                    управления лицензиями на подписку,
                     {' '}
                     <MailtoLink to="customersuccess@edx.org" className="alert-link">
-                      contact Customer Support
+                      связаться со службой поддержки клиентов
                     </MailtoLink>.
                   </Alert>
                   <div className="table-responsive">
@@ -190,7 +191,7 @@ const LicenseManagementTabContentTable = () => {
                   <hr className="mt-0" />
                   <Alert variant="warning">
                     <Icon src={WarningFilled} className="alert-icon" />
-                    <Alert.Heading>No results found</Alert.Heading>
+                    <Alert.Heading>Результаты не найдены</Alert.Heading>
                     <p>{activeTabData.noResultsLabel}</p>
                   </Alert>
                 </>

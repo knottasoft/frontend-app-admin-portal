@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import { Field } from 'redux-form';
 
@@ -7,25 +8,25 @@ import { normalizeFileUpload } from '../../utils';
 
 const BulkAssignFields = () => (
   <>
-    <h3 className="mb-2">Add learners</h3>
+    <h3 className="mb-2">Добавить обучающихся</h3>
     <div className="pl-4 field-group">
       <Field
         name="email-addresses"
         component={TextAreaAutoSize}
-        label="Email Addresses"
-        description="To add more than one user, enter one email address per line."
+        label="Адреса электронной почты"
+        description="Чтобы добавить более одного пользователя, введите один адрес электронной почты в каждой строке."
         descriptionTestId="email-addresses-help-text"
         data-hj-suppress
       />
       <p className="pb-2">
-        OR
+        ИЛИ
       </p>
       <Field
         id="csv-email-addresses"
         name="csv-email-addresses"
         component={FileInput}
-        label="Upload Email Addresses"
-        description="The file must be a CSV containing a single column of email addresses."
+        label="Загрузить адреса электронной почты"
+        description="Файл должен представлять собой CSV, содержащий один столбец адресов электронной почты."
         descriptionTestId="csv-email-addresses-help-text"
         accept=".csv"
         normalize={normalizeFileUpload}

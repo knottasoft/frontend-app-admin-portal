@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -40,7 +41,7 @@ Logo.propTypes = {
 export const HeaderDropdown = ({ user, enterpriseSlug }) => {
   const { profileImage, username } = user;
   const avatarImage = profileImage?.hasImage ? profileImage.imageUrlMedium : null;
-  const avatarScreenReaderText = `Profile image for ${username}`;
+  const avatarScreenReaderText = `Изображение профиля для ${username}`;
 
   return (
     <Dropdown>
@@ -57,7 +58,7 @@ export const HeaderDropdown = ({ user, enterpriseSlug }) => {
         <Dropdown.Item
           href={getLogoutRedirectUrl(getProxyLoginUrl(enterpriseSlug))}
         >
-          Logout
+          Выйти
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>

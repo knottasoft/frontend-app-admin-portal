@@ -57,7 +57,7 @@ const CouponBulkActions = ({
         onClick={() => handleBulkAction(value)}
         disabled={isTableLoading || noActionsAvailable}
       >
-        Go
+        Перейти
       </Button>
     </>
   );

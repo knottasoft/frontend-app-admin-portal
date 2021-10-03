@@ -11,12 +11,15 @@ import { ROUTE_NAMES } from '../EnterpriseApp/constants';
 import BulkEnrollContextProvider from './BulkEnrollmentContext';
 import BulkEnrollmentStepper from './stepper/BulkEnrollmentStepper';
 
-export const NO_DATA_MESSAGE = 'There are no results';
+import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import messages from './BulkEnrollment.messages';
+
+export const NO_DATA_MESSAGE = 'Нет результатов';
 
 export const BaseCourseSearch = ({
-  enterpriseId, enterpriseSlug, enterpriseName, match,
+  enterpriseId, enterpriseSlug, enterpriseName, match, intl
 }) => {
-  const PAGE_TITLE = `Search courses - ${enterpriseName}`;
+  const PAGE_TITLE = intl.formatMessage(messages['bulk.course-search.page.title'], {enterpriseName: enterpriseName});
   const [subscription, isLoadingSubscription] = useSubscriptionFromParams({ match });
   if (!subscription && !isLoadingSubscription) {
     return (
@@ -26,7 +29,7 @@ export const BaseCourseSearch = ({
   if (isLoadingSubscription) {
     return (
       <div data-testid="subscription-skelly">
-        <div className="sr-only">Loading...</div>
+        <div className="sr-only">{intl.formatMessage(messages['bulk.course-search.subscription-skelly'])}.</div>
         <Skeleton height={175} />
         <Skeleton className="mt-3" height={50} count={25} />
       </div>
@@ -54,6 +57,7 @@ BaseCourseSearch.defaultProps = {
 };
 
 BaseCourseSearch.propTypes = {
+  intl: intlShape.isRequired,
   // from redux store
   enterpriseId: PropTypes.string,
   enterpriseSlug: PropTypes.string,
@@ -68,4 +72,4 @@ const mapStateToProps = state => ({
   enterpriseName: state.portalConfiguration.enterpriseName,
 });
 
-export default connect(mapStateToProps)(BaseCourseSearch);
+export default connect(mapStateToProps)(injectIntl(BaseCourseSearch));

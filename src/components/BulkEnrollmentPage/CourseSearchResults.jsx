@@ -15,13 +15,16 @@ import { BulkEnrollContext } from './BulkEnrollmentContext';
 import BaseSelectionStatus from './table/BaseSelectionStatus';
 import { BaseSelectWithContext, BaseSelectWithContextHeader } from './table/BulkEnrollSelect';
 
-const ERROR_MESSAGE = 'An error occured while retrieving data';
-export const NO_DATA_MESSAGE = 'There are no course results';
-export const ENROLL_TEXT = 'Enroll learners';
+import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import messages from './BulkEnrollment.messages';
+
+const ERROR_MESSAGE = 'Произошла ошибка при извлечении данных';
+export const NO_DATA_MESSAGE = 'Результаты курсов отсутствуют';
+export const ENROLL_TEXT = 'Зачисление обучающихся';
 export const TABLE_HEADERS = {
-  courseName: 'Course name',
-  courseStartDate: 'Course start date',
-  partnerName: 'Partner',
+  courseName: 'Название курса',
+  courseStartDate: 'Дата начала курса',
+  partnerName: 'Партнер',
   enroll: '',
 };
 
@@ -44,6 +47,7 @@ const selectColumn = {
 
 export const BaseCourseSearchResults = (props) => {
   const {
+    intl,
     searchResults,
     // algolia recommends this prop instead of searching
     isSearchStalled,
@@ -56,17 +60,17 @@ export const BaseCourseSearchResults = (props) => {
   const columns = useMemo(() => [
     selectColumn,
     {
-      Header: TABLE_HEADERS.courseName,
+      Header: intl.formatMessage(messages['bulk.course-search.result.table.header.courseName']),
       accessor: 'title',
       // eslint-disable-next-line react/prop-types
       Cell: ({ value, row }) => <CourseNameCell value={value} row={row} enterpriseSlug={enterpriseSlug} />,
     },
     {
-      Header: TABLE_HEADERS.partnerName,
+      Header: intl.formatMessage(messages['bulk.course-search.result.table.header.partnerName']),
       accessor: 'partners[0].name',
     },
     {
-      Header: TABLE_HEADERS.courseStartDate,
+      Header: intl.formatMessage(messages['bulk.course-search.result.table.header.courseStartDate']),
       accessor: 'advertised_course_run.start',
       Cell: FormattedDateCell,
     },
@@ -87,7 +91,7 @@ export const BaseCourseSearchResults = (props) => {
   if (isSearchStalled) {
     return (
       <>
-        <div className="sr-only">Loading...</div>
+        <div className="sr-only">{intl.formatMessage(messages['bulk.course-search.result.skeleton'])}</div>
         <Skeleton className="mt-3" height={50} count={25} />
       </>
     );
@@ -98,7 +102,9 @@ export const BaseCourseSearchResults = (props) => {
       <StatusAlert
         alertType="danger"
         iconClassName="fa fa-times-circle"
-        message={`${ERROR_MESSAGE} ${error.message}`}
+        message={
+          intl.formatMessage(messages['bulk.course-search.result.message.error'], {errorMessage: error.message})
+        }
       />
     );
   }
@@ -107,7 +113,7 @@ export const BaseCourseSearchResults = (props) => {
       <StatusAlert
         alertType="warning"
         iconClassName="fa fa-exclamation-circle"
-        message={NO_DATA_MESSAGE}
+        message={intl.formatMessage(messages['bulk.course-search.result.message.nodata'])}
       />
     );
   }
@@ -143,6 +149,7 @@ BaseCourseSearchResults.defaultProps = {
 };
 
 BaseCourseSearchResults.propTypes = {
+  intl: intlShape.isRequired,
   // from Algolia
   searchResults: PropTypes.shape({
     nbHits: PropTypes.number,
@@ -162,4 +169,4 @@ BaseCourseSearchResults.propTypes = {
   enterpriseSlug: PropTypes.string.isRequired,
 };
 
-export default connectStateResults(BaseCourseSearchResults);
+export default connectStateResults(injectIntl(BaseCourseSearchResults));

@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, SubmissionError } from 'redux-form';
@@ -191,11 +192,11 @@ export class BaseCodeAssignmentModal extends React.Component {
 
     /* eslint-disable no-underscore-dangle */
     if (!emailAddress) {
-      const message = 'No email address provided. Please enter a valid email address.';
+      const message = 'Не указан адрес электронной почты. Пожалуйста, введите действительный адрес электронной почты.';
       errors[inputKey] = message;
       errors._error.push(message);
     } else if (emailAddress && !isEmail(emailAddress)) {
-      const message = 'The email address is not valid. Please try again.';
+      const message = 'Адрес электронной почты недействителен. Пожалуйста, попробуйте еще раз.';
       errors[inputKey] = message;
       errors._error.push(message);
     }
@@ -347,14 +348,14 @@ export class BaseCodeAssignmentModal extends React.Component {
         <div className="assignment-details mb-4">
           {isBulkAssign && this.hasBulkAssignData() && (
             <>
-              <p>Unassigned codes: {data.unassignedCodes}</p>
+              <p>Неприсвоенные коды: {data.unassignedCodes}</p>
               {numberOfSelectedCodes > 0 && <p>{displaySelectedCodes(numberOfSelectedCodes)}</p>}
             </>
           )}
           {!isBulkAssign && this.hasIndividualAssignData() && (
             <>
               <p>{displayCode(data.code.code)}</p>
-              <p className="code-remaining-uses">Remaining Uses: {data.remainingUses}</p>
+              <p className="code-remaining-uses">Оставшееся использование: {data.remainingUses}</p>
             </>
           )}
         </div>
@@ -368,7 +369,7 @@ export class BaseCodeAssignmentModal extends React.Component {
             onChange={this.setNotify}
             data-testid={NOTIFY_LEARNERS_CHECKBOX_TEST_ID}
           >
-            Notify learners by email
+            Уведомить обучающихся по электронной почте
           </Form.Checkbox>
           { notify && (
             <EmailTemplateForm
@@ -414,7 +415,7 @@ export class BaseCodeAssignmentModal extends React.Component {
             >
               <>
                 {mode === MODAL_TYPES.assign && submitting && <Icon className="fa fa-spinner fa-spin mr-2" />}
-                {`Assign ${isBulkAssign ? 'Codes' : 'Code'}`}
+                {`Присвоить ${isBulkAssign ? 'Коды' : 'Код'}`}
               </>
             </Button>,
             <SaveTemplateButton
@@ -424,6 +425,7 @@ export class BaseCodeAssignmentModal extends React.Component {
               handleSubmit={handleSubmit}
             />,
           ]}
+          closeText="Отменить"
           onClose={onClose}
           open
         />

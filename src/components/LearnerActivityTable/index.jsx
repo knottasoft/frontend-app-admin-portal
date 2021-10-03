@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -5,52 +6,54 @@ import TableContainer from '../../containers/TableContainer';
 import { formatTimestamp, formatPassedTimestamp, formatPercentage } from '../../utils';
 import EnterpriseDataApiService from '../../data/services/EnterpriseDataApiService';
 
+import { injectIntl, FormattedDate } from '@edx/frontend-platform/i18n';
+
 class LearnerActivityTable extends React.Component {
   getTableColumns() {
     const { activity } = this.props;
     const tableColumns = [
       {
-        label: 'Email',
+        label: 'Электронная почта',
         key: 'user_email',
         columnSortable: true,
       },
       {
-        label: 'Course Title',
+        label: 'Название курса',
         key: 'course_title',
         columnSortable: true,
       },
       {
-        label: 'Course Price',
+        label: 'Цена курса',
         key: 'course_price',
         columnSortable: true,
       },
       {
-        label: 'Start Date',
+        label: 'Дата начала',
         key: 'course_start',
         columnSortable: true,
       },
       {
-        label: 'End Date',
+        label: 'Дата окончания',
         key: 'course_end',
         columnSortable: true,
       },
       {
-        label: 'Passed Date',
+        label: 'Дата прохождения',
         key: 'passed_timestamp',
         columnSortable: true,
       },
       {
-        label: 'Current Grade',
+        label: 'Текущая оценка',
         key: 'current_grade',
         columnSortable: true,
       },
       {
-        label: 'Progress Status',
+        label: 'Состояние прогресса',
         key: 'progress_status',
         columnSortable: true,
       },
       {
-        label: 'Last Activity Date',
+        label: 'Дата последней активности',
         key: 'last_activity_date',
         columnSortable: true,
       },

@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
@@ -119,7 +120,7 @@ class MoodleIntegrationConfigForm extends React.Component {
           <StatusAlert
             alertType="danger"
             iconClassName="fa fa-times-circle"
-            title="Unable to submit config form:"
+            title="Неудается отправить форму конфигурации:"
             message={error}
           />
         </div>
@@ -140,7 +141,7 @@ class MoodleIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="active"
             >
-              <label htmlFor="active">Active</label>
+              <label htmlFor="active">Активно</label>
               <Input
                 type="checkbox"
                 id="active"
@@ -157,10 +158,10 @@ class MoodleIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="moodleBaseUrl"
               invalid={invalidFields.moodleBaseUrl}
-              invalidMessage="Moodle Instance URL is required."
-              helpText="Your Moodle instance URL. Make sure to include the protocol (ie https/http)"
+              invalidMessage="Требуется URL-адрес экземпляра Moodle."
+              helpText="URL вашего экземпляра Moodle. Обязательно укажите протокол (т.е. https/http)."
             >
-              <label htmlFor="moodleBaseUrl">Moodle Instance URL</label>
+              <label htmlFor="moodleBaseUrl">URL-адрес экземпляра Moodle</label>
               <Input
                 type="text"
                 id="moodleBaseUrl"
@@ -176,10 +177,10 @@ class MoodleIntegrationConfigForm extends React.Component {
             <ValidationFormGroup
               for="serviceShortName"
               invalid={invalidFields.serviceShortName}
-              invalidMessage="Webservice name is required."
-              helpText="This should match the webservice's short name in Moodle."
+              invalidMessage="Имя веб-сервиса обязательно."
+              helpText="Это должно соответствовать короткому имени веб-сервиса в Moodle."
             >
-              <label htmlFor="serviceShortName">Webservice&apos;s Short Name</label>
+              <label htmlFor="serviceShortName">Короткое имя вебсервиса</label>
               <Input
                 type="text"
                 id="serviceShortName"
@@ -194,9 +195,9 @@ class MoodleIntegrationConfigForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="categoryId"
-              helpText="The category id all edX courses will be added under. Default is 1 (Miscellaneous)"
+              helpText="Идентификатор категории, под которой будут добавлены все курсы edX. По умолчанию 1 (Разное)"
             >
-              <label htmlFor="categoryId">Moodle Category ID</label>
+              <label htmlFor="categoryId">Идентификатор категории Moodle</label>
               <Input
                 type="number"
                 id="categoryId"
@@ -211,11 +212,11 @@ class MoodleIntegrationConfigForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="username"
-              helpText="The Webservice's username in Moodle. You must provide this and password or a token"
+              helpText="Имя пользователя веб-сервиса в Moodle. Вы должны указать его и пароль или токен."
               invalid={invalidFields.username || invalidFields.duplicateCreds}
-              invalidMessage="A username and password must be provided when a token is not. However, you should not provide both user credentials and token."
+              invalidMessage="Имя пользователя и пароль должны быть предоставлены, если токен не указан. Однако не следует предоставлять как учетные данные пользователя, так и токен."
             >
-              <label htmlFor="username">Webservice Username</label>
+              <label htmlFor="username">Имя пользователя веб-сервиса</label>
               <Input
                 type="text"
                 id="username"
@@ -230,11 +231,11 @@ class MoodleIntegrationConfigForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="password"
-              helpText="The Webservice's password in Moodle. You must provide this and username or a token"
+              helpText="Пароль веб-сервиса в Moodle. Вы должны предоставить его и имя пользователя или токен"
               invalid={invalidFields.password || invalidFields.duplicateCreds}
-              invalidMessage="A username and password must be provided when a token is not. However, you should not provide both user credentials and token."
+              invalidMessage="Имя пользователя и пароль должны быть предоставлены, если токен не указан. Однако не следует предоставлять как учетные данные пользователя, так и токен."
             >
-              <label htmlFor="password">Webservice Password</label>
+              <label htmlFor="password">Пароль веб-сервиса</label>
               <Input
                 type="text"
                 id="password"
@@ -249,11 +250,11 @@ class MoodleIntegrationConfigForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="token"
-              helpText="The Webservice user's auth token. Use this in place of a username/password."
+              helpText="Аутентификационный токен пользователя веб-сервиса. Используйте его вместо имени пользователя/пароля."
               invalid={invalidFields.token || invalidFields.duplicateCreds}
-              invalidMessage="A token must be provided when username/password is not. However, you should not provide both user credentials and token."
+              invalidMessage="Токен должен быть предоставлен, если имя пользователя/пароль не используются. Однако не следует предоставлять как учетные данные пользователя, так и токен."
             >
-              <label htmlFor="token">Webservice Auth Token</label>
+              <label htmlFor="token">Токен авторизации веб-сервиса</label>
               <Input
                 type="text"
                 id="token"
@@ -272,10 +273,10 @@ class MoodleIntegrationConfigForm extends React.Component {
               type="submit"
               id="submitButton"
               labels={{
-                default: 'Submit',
-                pending: 'Saving...',
-                complete: 'Complete',
-                error: 'Error',
+                default: 'Отправить',
+                pending: 'Сохранение...',
+                complete: 'Завершено',
+                error: 'Ошибка',
               }}
               icons={{
                 default: <Icon className="fa fa-download" />,

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import { configuration } from '../../../config';
+import { injectIntl, FormattedDate } from '@edx/frontend-platform/i18n';
 
 export const CourseNameCell = ({ value, row, enterpriseSlug }) => (
   <a
@@ -25,7 +26,16 @@ CourseNameCell.propTypes = {
   enterpriseSlug: PropTypes.string.isRequired,
 };
 
-export const FormattedDateCell = ({ value }) => <span>{moment(value).format('MMM D, YYYY')}</span>;
+export const FormattedDateCell = injectIntl(({ value }) =>
+  <span>
+    <FormattedDate
+      value={moment(value).format('MMM D, YYYY')}
+      year = 'numeric'
+      month= 'long'
+      day = 'numeric'
+    />
+  </span>
+);
 
 FormattedDateCell.propTypes = {
   value: PropTypes.string.isRequired,

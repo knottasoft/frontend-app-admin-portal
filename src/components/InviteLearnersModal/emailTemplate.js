@@ -1,15 +1,16 @@
+// TODO: Lang support
 import { getSubscriptionContactText } from '../../utils';
 
 const emailTemplate = {
-  greeting: 'Congratulations!',
-  body: `{ENTERPRISE_NAME} has partnered with edX to give you an unlimited subscription to learn on edX!  Take the best courses in the most in-demand subject areas and upskill for a new career opportunity.  Earn a professional certificate, start a program or just learn for fun.
+  greeting: 'Поздравляем!',
+  body: `{ENTERPRISE_NAME} сотрудничает с ЦОПП СК, чтобы предоставить вам неограниченную подписку на обучение на платформе ЦОПП СК!  Пройдите лучшие курсы в самых востребованных предметных областях и повысьте квалификацию для начала новой карьеры.  Получите профессиональный сертификат, начните программу или просто учитесь для удовольствия.
 {LICENSE_ACTIVATION_LINK}
 
-About edX
+О ЦОПП СК
 
-Since 2012, edX has been committed to increasing access to high-quality education for everyone, everywhere. By harnessing the transformative power of education through online learning, edX empowers learners to unlock their potential and become changemakers.
+С 2019 года ЦОПП СК стремится расширить доступ к высококачественному образованию для всех и везде. Используя трансформирующую силу образования через онлайн-обучение, ЦОПП СК дает возможность учащимся раскрыть свой потенциал и стать теми, кто меняет мир.
 
-We are excited to welcome you to our growing community of over 35 million users and 15 thousand instructors from 160 partner universities and organizations.
+Мы рады приветствовать вас в нашем растущем сообществе!
 `,
   closing: getSubscriptionContactText,
 };

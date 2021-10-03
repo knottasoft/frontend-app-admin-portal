@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
@@ -26,9 +27,9 @@ class RequestCodesPage extends React.Component {
     return (
       <>
         <Helmet>
-          <title>Request More Codes</title>
+          <title>Запросить коды</title>
         </Helmet>
-        <Hero title="Request More Codes" />
+        <Hero title="Запросить дополнительные коды" />
         <div className="container-fluid">
           <div className="row my-3">
             <div className="col">

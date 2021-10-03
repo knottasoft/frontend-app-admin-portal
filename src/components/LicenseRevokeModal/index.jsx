@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, SubmissionError } from 'redux-form';
@@ -91,8 +92,8 @@ class LicenseRevokeModal extends React.Component {
         {this.shouldRenderRevocationCapAlert() && (
           <Alert variant="warning">
             <p className="m-0">
-              You have already revoked {revocations.applied} licenses. You
-              have {revocations.remaining} revocations left on your plan.
+              Вы уже отозвали {revocations.applied} лицензий. В вашем
+              плане осталось {revocations.remaining} лицензий.
             </p>
           </Alert>
         )}
@@ -100,14 +101,14 @@ class LicenseRevokeModal extends React.Component {
           <>
             {submitFailed && this.renderErrorMessage()}
             <p>
-              Revoking a license will remove access to the subscription catalog
-              for <strong data-hj-suppress>{user.userEmail}</strong>. They will still be able to
-              access their courses in the audit track and their certificates.
+              Отзыв лицензии приведет к удалению доступа к каталогу подписок для
+              <strong data-hj-suppress>{user.userEmail}</strong>. Они все еще будут иметь
+              доступ к своим курсам в треке аудита и своим сертификатам.
             </p>
             <p>
-              This action cannot be undone. To re-enable access, you can
-              assign <strong data-hj-suppress>{user.userEmail}</strong> to another license, but they
-              will need to re-enroll in any course after being assigned a new license.
+              Это действие нельзя отменить. Чтобы снова разрешить доступ, вы можете назначить
+              <strong data-hj-suppress>{user.userEmail}</strong> на другую лицензию, но им необходимо
+              будет заново зарегистрироваться на любой курс после назначения новой лицензии.
             </p>
           </>
         </div>
@@ -117,7 +118,7 @@ class LicenseRevokeModal extends React.Component {
 
   renderErrorMessage() {
     const modalErrors = {
-      revoke: 'Unable to revoke license',
+      revoke: 'Неудается отозвать лицензию',
     };
     const { error } = this.props;
 
@@ -141,7 +142,7 @@ class LicenseRevokeModal extends React.Component {
   }
 
   renderTitle() {
-    return 'Are you sure you want to revoke this license?';
+    return 'Вы уверены, что хотите отозвать эту лицензию?';
   }
 
   render() {
@@ -170,7 +171,7 @@ class LicenseRevokeModal extends React.Component {
             </>
           </Button>,
         ]}
-        closeText="Cancel"
+        closeText="Отменить"
         onClose={onClose}
         open
       />

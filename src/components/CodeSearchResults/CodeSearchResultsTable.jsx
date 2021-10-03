@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -12,29 +13,31 @@ import RevokeButton from '../RevokeButton';
 
 import EcommerceApiService from '../../data/services/EcommerceApiService';
 
+import { injectIntl, FormattedDate } from '@edx/frontend-platform/i18n';
+
 const tableColumns = [
   {
-    label: 'Coupon Batch',
+    label: 'Партия купонов',
     key: 'couponName',
   },
   {
-    label: 'Code',
+    label: 'Код',
     key: 'code',
   },
   {
-    label: 'Redeemed',
+    label: 'Погашено',
     key: 'isRedeemed',
   },
   {
-    label: 'Redemption Date',
+    label: 'Дата погашения',
     key: 'redemptionDate',
   },
   {
-    label: 'Course Title',
+    label: 'Название курса',
     key: 'courseTitle',
   },
   {
-    label: 'Actions',
+    label: 'Действия',
     key: 'actions',
   },
 ];
@@ -81,7 +84,7 @@ const handleTableColumns = (searchQuery) => {
   } else if (isValidEmail(searchQuery) !== undefined && assignedToColumnIndex === -1) {
     // Add "Assigned To" column if it doesn't already exist
     tableColumns.splice(4, 0, {
-      label: 'Assigned To',
+      label: 'Присвоено',
       key: 'assignedTo',
     });
   }
@@ -113,11 +116,11 @@ const CodeSearchResultsTable = ({
       couponName,
       code,
       isRedeemed: isRedeemed ? (
-        <Icon className="fa fa-check text-primary" screenReaderText="has been redeemed" />
+        <Icon className="fa fa-check text-primary" screenReaderText="был погашен" />
       ) : defaultEmptyValue,
       courseTitle: courseTitle || defaultEmptyValue,
       assignedTo: assignedTo || defaultEmptyValue,
-      redemptionDate: redemptionDate || defaultEmptyValue,
+      redemptionDate: <FormattedDate value={redemptionDate} /> || defaultEmptyValue,
       actions: !isRedeemed && isAssigned ? (
         <>
           <RemindButton
@@ -168,4 +171,4 @@ CodeSearchResultsTable.propTypes = {
   }).isRequired,
 };
 
-export default withRouter(CodeSearchResultsTable);
+export default withRouter(injectIntl(CodeSearchResultsTable));

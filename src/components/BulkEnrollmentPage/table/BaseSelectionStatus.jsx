@@ -8,8 +8,12 @@ import {
   setSelectedRowsAction,
 } from '../data/actions';
 
+import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import messages from './BulkEnrollmentTable.messages';
+
 // This selection status component uses the BulkEnrollContext to show selection status rather than the data table state.
 const BaseSelectionStatus = ({
+  intl,
   className,
   selectedRows,
   dispatch,
@@ -25,14 +29,18 @@ const BaseSelectionStatus = ({
 
   return (
     <div className={className}>
-      <span>{isAllRowsSelected && 'All '}{numSelectedRows} selected </span>
+
+      <span>{ intl.formatMessage(messages['bulk.table.selection.status.message'],
+            { isAllRowsSelected: isAllRowsSelected ? 'All ' : '', numSelectedRows: numSelectedRows }) }
+      </span>
+      {/*<span>{isAllRowsSelected && 'All '}{numSelectedRows} selected </span>*/}
       {!areAllDisplayedRowsSelected && (
         <Button
           variant="link"
           size="inline"
           onClick={() => { dispatch(setSelectedRowsAction(rows)); }}
         >
-          Select {rows.length}
+          { intl.formatMessage(messages['bulk.table.selection.status.selected'], {rowsCount:rows.length} )}
         </Button>
       )}
       {numSelectedRows > 0 && (
@@ -41,7 +49,7 @@ const BaseSelectionStatus = ({
           size="inline"
           onClick={() => { dispatch(clearSelectionAction()); }}
         >
-          Clear selection
+          {intl.formatMessage(messages['bulk.table.selection.status.clear'])}
         </Button>
       )}
     </div>
@@ -53,9 +61,10 @@ BaseSelectionStatus.defaultProps = {
 };
 
 BaseSelectionStatus.propTypes = {
+  intl: intlShape.isRequired,
   className: PropTypes.string,
   selectedRows: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
-export default BaseSelectionStatus;
+export default injectIntl(BaseSelectionStatus);

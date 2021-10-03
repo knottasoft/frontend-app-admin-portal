@@ -1,3 +1,4 @@
+// TODO: Lang support
 import { SubmissionError } from 'redux-form';
 import isEmail from 'validator/lib/isEmail';
 import _ from 'lodash';
@@ -15,12 +16,12 @@ const validateEmailTemplateFields = (formData, templateKey, isSubjectRequired = 
   const emailTemplateKey = formData[templateKey];
 
   if (!emailTemplateKey) {
-    const message = 'An email template is required.';
+    const message = 'Требуется шаблон электронной почты.';
     errorsDict[templateKey] = message;
     errorsDict._error.push(message);
   }
   if (isSubjectRequired && !emailSubject) {
-    const message = 'No email subject provided. Please enter email subject.';
+    const message = 'Не указана тема письма. Пожалуйста, введите тему письма.';
     errorsDict[EMAIL_TEMPLATE_SUBJECT_KEY] = message;
     errorsDict._error.push(message);
   }
@@ -28,15 +29,15 @@ const validateEmailTemplateFields = (formData, templateKey, isSubjectRequired = 
   const templateErrorMessages = {
     'email-template-subject': {
       limit: OFFER_ASSIGNMENT_EMAIL_SUBJECT_LIMIT,
-      message: `Email subject must be ${OFFER_ASSIGNMENT_EMAIL_SUBJECT_LIMIT} characters or less.`,
+      message: `Тема письма должна содержать не более ${OFFER_ASSIGNMENT_EMAIL_SUBJECT_LIMIT} символов.`,
     },
     'email-template-greeting': {
       limit: EMAIL_TEMPLATE_FIELD_MAX_LIMIT,
-      message: `Email greeting must be ${EMAIL_TEMPLATE_FIELD_MAX_LIMIT} characters or less.`,
+      message: `Приветствие по электронной почте должно содержать не более ${EMAIL_TEMPLATE_FIELD_MAX_LIMIT} символов.`,
     },
     'email-template-closing': {
       limit: EMAIL_TEMPLATE_FIELD_MAX_LIMIT,
-      message: `Email closing must be ${EMAIL_TEMPLATE_FIELD_MAX_LIMIT} characters or less.`,
+      message: `Завершение сообщения электронной почты должно состоять из ${EMAIL_TEMPLATE_FIELD_MAX_LIMIT} символов или меньше.`,
     },
   };
 
@@ -100,9 +101,9 @@ const validateEmailAddressesFields = (formData) => {
 
   if (invalidEmailIndices.length > 0) {
     const lastEmail = invalidEmailIndices.pop();
-    const message = `Email address on line ${invalidEmailIndices.join(', ')} \
-${invalidEmailIndices.length !== 0 ? `and ${lastEmail}` : `${lastEmail}`} \
-is invalid. Please try again.`;
+    const message = `Адрес электронной почты на строке ${invalidEmailIndices.join(', ')} \
+${invalidEmailIndices.length !== 0 ? `и ${lastEmail}` : `${lastEmail}`} \
+неверен. Пожалуйста, попробуйте еще раз.`;
 
     errorsDict[textAreaEmails ? EMAIL_ADDRESS_TEXT_FORM_DATA : EMAIL_ADDRESS_CSV_FORM_DATA] = message;
     errorsDict._error.push(message);
@@ -128,7 +129,7 @@ const validateEmailAddrTemplateForm = (formData, templateKey) => {
   // The 'subject' field is not required here.
   let errorsDict = validateEmailTemplateFields(formData, templateKey, false);
   if (!formData[EMAIL_ADDRESS_TEXT_FORM_DATA] && !formData[EMAIL_ADDRESS_CSV_FORM_DATA]) {
-    const message = 'Either user emails or emails csv must be provided.';
+    const message = 'Необходимо указать либо электронную почту пользователя, либо csv-файл с электронными почтами.';
     errorsDict[EMAIL_ADDRESS_TEXT_FORM_DATA] = message;
     errorsDict[EMAIL_ADDRESS_CSV_FORM_DATA] = message;
     errorsDict._error.push(message);
@@ -145,7 +146,7 @@ const returnValidatedEmails = (formData) => {
   // raises a Submission error or otherwise returns a list of valid emails.
   const errorsDict = validateEmailAddressesFields(formData);
   if (!formData[EMAIL_ADDRESS_TEXT_FORM_DATA] && !formData[EMAIL_ADDRESS_CSV_FORM_DATA]) {
-    const message = 'Either user emails or emails csv must be provided.';
+    const message = 'Необходимо указать либо электронную почту пользователя, либо csv-файл с электронными почтами.';
     errorsDict[EMAIL_ADDRESS_TEXT_FORM_DATA] = message;
     errorsDict[EMAIL_ADDRESS_CSV_FORM_DATA] = message;
     errorsDict._error.push(message);

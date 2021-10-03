@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -7,9 +8,11 @@ import CouponDetails from '../../containers/CouponDetails';
 
 import { isTriggerKey, formatTimestamp } from '../../utils';
 
+import { injectIntl, FormattedDate } from '@edx/frontend-platform/i18n';
+
 const triggerKeys = {
-  OPEN_DETAILS: [' ', 'Enter'],
-  CLOSE_DETAILS: [' ', 'Enter', 'Escape'],
+  OPEN_DETAILS: [' ', 'Ввести'],
+  CLOSE_DETAILS: [' ', 'Ввести', 'Выйти'],
 };
 
 class Coupon extends React.Component {
@@ -86,11 +89,11 @@ class Coupon extends React.Component {
     const { isExpanded } = this.state;
     const iconClass = isExpanded ? 'fa-chevron-up' : 'fa-chevron-down';
     const iconColor = isExpanded ? 'text-white' : 'text-primary';
-    const screenReaderText = isExpanded ? 'Close' : 'Open';
+    const screenReaderText = isExpanded ? 'Закрыть' : 'Открыть';
     return (
       <Icon
         className={classNames('fa', iconClass, iconColor)}
-        screenReaderText={`${screenReaderText} coupon details`}
+        screenReaderText={`${screenReaderText} данные купона`}
       />
     );
   }
@@ -99,7 +102,7 @@ class Coupon extends React.Component {
     return (
       <Icon
         className="fa fa-exclamation-circle text-danger mr-2"
-        screenReaderText="Coupon has an error."
+        screenReaderText="Купон содержит ошибку."
       />
     );
   }
@@ -112,7 +115,7 @@ class Coupon extends React.Component {
       },
     } = this.props;
 
-    const text = maxUses ? `${numUses} of ${maxUses}` : numUses;
+    const text = maxUses ? `${numUses} из ${maxUses}` : numUses;
     const children = [text];
 
     if (maxUses) {
@@ -159,21 +162,21 @@ class Coupon extends React.Component {
           aria-controls={`coupon-details-${data.id}`}
         >
           <div className="col-sm-12 col-lg-3 mb-2 mb-lg-0">
-            <small className={classNames({ 'text-muted': !isExpanded, 'text-light': isExpanded })}>Coupon Name</small>
+            <small className={classNames({ 'text-muted': !isExpanded, 'text-light': isExpanded })}>Название купона</small>
             <div>{data.title}</div>
           </div>
           <div className="col-sm-12 col-lg-4 mb-2 mb-lg-0">
             <div className="row no-gutters">
               <div className="col">
-                <small className={classNames({ 'text-muted': !isExpanded, 'text-light': isExpanded })}>Valid From</small>
+                <small className={classNames({ 'text-muted': !isExpanded, 'text-light': isExpanded })}>Действует с</small>
                 <div>
                   {formatTimestamp({ timestamp: data.start_date })}
                 </div>
               </div>
               <div className="col">
-                <small className={classNames({ 'text-muted': !isExpanded, 'text-light': isExpanded })}>Valid To</small>
+                <small className={classNames({ 'text-muted': !isExpanded, 'text-light': isExpanded })}>Действует до</small>
                 <div>
-                  {formatTimestamp({ timestamp: data.end_date })}
+                  {formatTimestamp({ timestamp: data.end_date })}}
                 </div>
               </div>
             </div>
@@ -181,11 +184,11 @@ class Coupon extends React.Component {
           <div className="col-sm-12 col-lg-4 mb-2 mb-lg-0">
             <div className="row no-gutters">
               <div className="col">
-                <small className={classNames({ 'text-muted': !isExpanded, 'text-light': isExpanded })}>Assignments Remaining</small>
+                <small className={classNames({ 'text-muted': !isExpanded, 'text-light': isExpanded })}>Оставшиеся назначения</small>
                 <div>{data.num_unassigned}</div>
               </div>
               <div className="col">
-                <small className={classNames({ 'text-muted': !isExpanded, 'text-light': isExpanded })}>Enrollments Redeemed</small>
+                <small className={classNames({ 'text-muted': !isExpanded, 'text-light': isExpanded })}>Погашенные зачисления</small>
                 <div>
                   {this.renderEnrollmentsRedeemed()}
                 </div>
@@ -228,4 +231,4 @@ Coupon.propTypes = {
   onCollapse: PropTypes.func,
 };
 
-export default Coupon;
+export default injectIntl(Coupon);

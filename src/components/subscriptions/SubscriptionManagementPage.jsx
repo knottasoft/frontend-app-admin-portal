@@ -11,7 +11,7 @@ import MultipleSubscriptionsPage from './MultipleSubscriptionsPage';
 import SubscriptionDetailPage from './SubscriptionDetailPage';
 import { ROUTE_NAMES } from '../EnterpriseApp/constants';
 
-const PAGE_TITLE = 'Subscription Management';
+const PAGE_TITLE = 'Управление подпиской';
 
 function SubscriptionManagementPage({ enterpriseId }) {
   return (

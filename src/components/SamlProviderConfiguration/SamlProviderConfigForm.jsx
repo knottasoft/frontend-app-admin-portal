@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
@@ -92,7 +93,7 @@ class SamlProviderConfigForm extends React.Component {
           <StatusAlert
             alertType="danger"
             iconClassName="fa fa-times-circle"
-            title="Unable to submit config form:"
+            title="Не удается отправить форму конфигурации:"
             message={error}
           />
         </div>
@@ -113,7 +114,7 @@ class SamlProviderConfigForm extends React.Component {
             <ValidationFormGroup
               for="enabled"
             >
-              <label htmlFor="enabled">Enabled</label>
+              <label htmlFor="enabled">Включено</label>
               <Input
                 type="checkbox"
                 id="enabled"
@@ -129,9 +130,9 @@ class SamlProviderConfigForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="maxSession"
-              helpText="If this option is set, then users logging in using this SSO provider will have their session length limited to no longer than this value. If set to 0 (zero), the session will expire upon the user closing their browser. If left blank, the Django platform session default length will be used."
+              helpText="Если этот параметр установлен, то у пользователей, входящих в систему с помощью данного провайдера SSO, длина сеанса будет ограничена не более чем этим значением. Если установлено значение 0 (ноль), то сессия истечет после того, как пользователь закроет браузер. Если оставить значение пустым, будет использоваться стандартная длина сессии платформы Django."
             >
-              <label htmlFor="maxSession">Max session length (seconds)</label>
+              <label htmlFor="maxSession">Максимальная продолжительность сеанса (секунды)</label>
               <Input
                 type="number"
                 id="maxSessionLength"
@@ -145,9 +146,9 @@ class SamlProviderConfigForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="syncLearnerProfileData"
-              helpText="Synchronize user profile data received from the identity provider with the edX user account on each SSO login. The user will be notified if the email address associated with their account is changed as a part of this synchronization."
+              helpText="Синхронизировать данные профиля пользователя, полученные от поставщика идентификационных данных, с учетной записью пользователя edX при каждом входе в систему SSO. Пользователь будет уведомлен, если адрес электронной почты, связанный с его учетной записью, будет изменен в рамках этой синхронизации."
             >
-              <label htmlFor="syncLearnerProfileData">Sync learner profile data</label>
+              <label htmlFor="syncLearnerProfileData">Синхронизация данных профиля учащегося</label>
               <Input
                 type="checkbox"
                 id="syncLearnerProfileData"
@@ -167,11 +168,11 @@ class SamlProviderConfigForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="entityId"
-              helpText="The Entity ID of a provider is typically a url and would be provided by the SAMLProvider. Example: https://idp.testshib.org/idp/shibboleth"
+              helpText="Идентификатор сущности провайдера обычно представляет собой url и предоставляется SAMLProvider. Пример: https://idp.testshib.org/idp/shibbolet"
               invalid={invalidFields.entityId}
-              invalidMessage="Entity ID is required."
+              invalidMessage="Требуется идентификатор сущности."
             >
-              <label htmlFor="entityId">Entity ID<span className="required">*</span></label>
+              <label htmlFor="entityId">ID сущности<span className="required">*</span></label>
               <Input
                 type="text"
                 id="entityId"
@@ -186,11 +187,11 @@ class SamlProviderConfigForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="metadataSource"
-              helpText="URL to this provider's XML metadata. Should be an HTTPS URL. Example: https://www.testshib.org/metadata/testshib-providers.xml"
+              helpText="URL-адрес XML-метаданных этого провайдера. Это должен быть HTTPS URL. Пример: https://www.testshib.org/metadata/testshib-providers.xml"
               invalid={invalidFields.metadataSource}
-              invalidMessage="Metadata Source is required."
+              invalidMessage="Требуется Источник метаданных."
             >
-              <label htmlFor="metadataSource">Metadata Source<span className="required">*</span></label>
+              <label htmlFor="metadataSource">Источник метаданных<span className="required">*</span></label>
               <Input
                 type="text"
                 id="metadataSource"
@@ -205,9 +206,9 @@ class SamlProviderConfigForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="attrUserPermanentId"
-              helpText="URN of the SAML attribute that we can use as a unique, persistent user ID. Leave blank for default."
+              helpText="URN атрибута SAML, который мы можем использовать в качестве уникального, постоянного идентификатора пользователя. Оставьте пустым для значения по умолчанию."
             >
-              <label htmlFor="attrUserPermanentId">User ID Attribute</label>
+              <label htmlFor="attrUserPermanentId">Атрибут "ID пользователя"</label>
               <Input
                 type="text"
                 id="attrUserPermanentId"
@@ -222,9 +223,9 @@ class SamlProviderConfigForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="attrFullName"
-              helpText="URN of SAML attribute containing the user's full name. Leave blank for default."
+              helpText="URN атрибута SAML, содержащего полное имя пользователя. Оставьте пустым по умолчанию."
             >
-              <label htmlFor="attrFullName">Full Name Attribute</label>
+              <label htmlFor="attrFullName">Атрибут "Полное имя"</label>
               <Input
                 type="text"
                 id="attrFullName"
@@ -239,9 +240,9 @@ class SamlProviderConfigForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="attrFirstName"
-              helpText="URN of SAML attribute containing the user's first name. Leave blank for default."
+              helpText="URN атрибута SAML, содержащего имя пользователя. Оставьте пустым по умолчанию."
             >
-              <label htmlFor="attrFirstName">First Name Attribute</label>
+              <label htmlFor="attrFirstName">Атрибут "Имя"</label>
               <Input
                 type="text"
                 id="attrFirstName"
@@ -256,9 +257,9 @@ class SamlProviderConfigForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="attrLastName"
-              helpText="URN of SAML attribute containing the user's last name. Leave blank for default."
+              helpText="URN атрибута SAML, содержащего фамилию пользователя. Оставьте пустым по умолчанию."
             >
-              <label htmlFor="attrLastName">Last Name Attribute</label>
+              <label htmlFor="attrLastName">Атрибут "Фамилия"</label>
               <Input
                 type="text"
                 id="attrLastName"
@@ -273,9 +274,9 @@ class SamlProviderConfigForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="attrEmail"
-              helpText="URN of SAML attribute containing the user's email address[es]. Leave blank for default."
+              helpText="URN атрибута SAML, содержащего адрес электронной почты пользователя. Оставьте пустым по умолчанию."
             >
-              <label htmlFor="attrEmail">Email Address Attribute</label>
+              <label htmlFor="attrEmail">Атрибут "Электронная почта"</label>
               <Input
                 type="text"
                 id="attrEmail"
@@ -290,9 +291,9 @@ class SamlProviderConfigForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="country"
-              helpText="URN of SAML attribute containing the user's country"
+              helpText="URN атрибута SAML, содержащего страну пользователя"
             >
-              <label htmlFor="country">Country</label>
+              <label htmlFor="country">Страна</label>
               <Input
                 type="text"
                 id="country"
@@ -316,10 +317,10 @@ class SamlProviderConfigForm extends React.Component {
               type="submit"
               id="submitButton"
               labels={{
-                default: 'Submit',
-                pending: 'Saving...',
-                complete: 'Complete',
-                error: 'Error',
+                default: 'Отправить',
+                pending: 'Сохранение...',
+                complete: 'Завершено',
+                error: 'Ошибка',
               }}
               icons={{
                 default: <Icon className="fa fa-download" />,
@@ -339,7 +340,7 @@ class SamlProviderConfigForm extends React.Component {
                 className=" mr-3"
                 onClick={() => this.props.deleteProviderConfig(config.id)}
               >
-                <Icon className="fa fa-times danger" /> Delete
+                <Icon className="fa fa-times danger" /> Удалить
               </Button>
             )}
           </div>

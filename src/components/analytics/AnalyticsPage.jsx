@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -7,7 +8,7 @@ import Hero from '../Hero';
 import StatusAlert from '../StatusAlert';
 import AnalyticsCharts from './AnalyticsCharts';
 
-const PAGE_TITLE = 'Analytics';
+const PAGE_TITLE = 'Аналитика';
 
 // eslint-disable-next-line no-unused-vars
 function AnalyticsPage({ enterpriseSlug, enterpriseId }) {

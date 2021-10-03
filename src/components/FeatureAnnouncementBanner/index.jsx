@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Alert } from '@edx/paragon';
@@ -40,7 +41,7 @@ const FeatureAnnouncementBanner = ({ enterpriseSlug }) => {
     isRead || !enterpriseNotificationBanner.text ? null : (
       <div>
         <Alert variant="info" dismissible onClose={markAsRead}>
-          <Alert.Heading>We have a new feature for you!</Alert.Heading>
+          <Alert.Heading>У нас есть новая функция для вас!</Alert.Heading>
           <p>
             {enterpriseNotificationBanner.text}
           </p>

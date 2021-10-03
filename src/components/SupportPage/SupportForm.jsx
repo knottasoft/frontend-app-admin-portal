@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
@@ -18,8 +19,8 @@ class SupportForm extends React.Component {
         className="mt-3"
         alertType="danger"
         iconClassName="fa fa-times-circle"
-        title="Unable to send your request to the edX Customer Success team."
-        message={`Try refreshing your screen (${message})`}
+        title="Не удалось отправить ваш запрос команде ЦОПП СК"
+        message={`Попробуйте обновить экран (${message})`}
       />
     );
   }
@@ -30,8 +31,8 @@ class SupportForm extends React.Component {
         className="mt-3"
         alertType="success"
         iconClassName="fa fa-check-circle"
-        title="Request received"
-        message="The edX Customer Success team will contact you soon."
+        title="Запрос получен"
+        message="Команда ЦОПП СК свяжется с вами в ближайшее время."
         dismissible
       />
     );
@@ -60,7 +61,7 @@ class SupportForm extends React.Component {
                 component={RenderField}
                 label={(
                   <>
-                    Email Address
+                    Адрес электронной почты
                     <span className="required">*</span>
                   </>
                 )}
@@ -74,7 +75,7 @@ class SupportForm extends React.Component {
                 component={RenderField}
                 label={(
                   <>
-                    Company
+                    Компания
                     <span className="required">*</span>
                   </>
                 )}
@@ -89,7 +90,7 @@ class SupportForm extends React.Component {
                 component={RenderField}
                 label={(
                   <>
-                    Subject
+                    Тема
                     <span className="required">*</span>
                   </>
                 )}
@@ -103,7 +104,7 @@ class SupportForm extends React.Component {
                 component={TextAreaAutoSize}
                 label={(
                   <>
-                    Notes
+                    Комментарии
                     <span className="required">*</span>
                   </>
                 )}
@@ -118,7 +119,7 @@ class SupportForm extends React.Component {
               >
                 <>
                   {submitting && <Icon className="fa fa-spinner fa-spin mr-2" />}
-                  Contact Support
+                  Связаться с поддержкой
                 </>
               </Button>
             </form>

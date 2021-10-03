@@ -10,6 +10,9 @@ import SearchBar from '../SearchBar';
 import { updateUrl } from '../../utils';
 import IconWithTooltip from '../IconWithTooltip';
 
+import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import messages from './Admin.messages.js';
+
 class AdminSearchForm extends React.Component {
   componentDidUpdate(prevProps) {
     const { searchParams: { searchQuery, searchCourseQuery, searchDateQuery } } = this.props;
@@ -46,6 +49,7 @@ class AdminSearchForm extends React.Component {
     const {
       tableData,
       searchParams: { searchCourseQuery, searchDateQuery, searchQuery },
+      intl
     } = this.props;
     const courseTitles = Array.from(new Set(tableData.map(en => en.course_title).sort()));
     const courseDates = Array.from(new Set(tableData.map(en => en.course_start).sort().reverse()));
@@ -56,7 +60,9 @@ class AdminSearchForm extends React.Component {
           <div className="row w-100 m-0">
             <div className="col-12 col-md-3 px-0 pl-0 pr-md-2 pr-lg-3">
               <Form.Group>
-                <Form.Label className="search-label mb-2">Filter by course</Form.Label>
+                <Form.Label className="search-label mb-2">
+                  {intl.formatMessage(messages['admin.searchForm.filter.course'])}
+                </Form.Label>
                 <Form.Control
                   className="w-100"
                   as="select"
@@ -78,11 +84,11 @@ class AdminSearchForm extends React.Component {
             <div className="col-12 col-md-3 px-0 pr-0 px-md-2 px-lg-3">
               <Form.Group>
                 <Form.Label className="search-label mb-2">
-                  Filter by start date
+                  {intl.formatMessage(messages['admin.searchForm.filter.startDate.label'])}
                   <IconWithTooltip
                     icon={faInfoCircle}
-                    altText="More information"
-                    tooltipText="A start date can be selected after the course name is selected."
+                    altText={intl.formatMessage(messages['admin.searchForm.filter.startDate.altText'])}
+                    tooltipText={intl.formatMessage(messages['admin.searchForm.filter.startDate.tooltipText'])}
                   />
                 </Form.Label>
                 <Form.Control
@@ -95,7 +101,11 @@ class AdminSearchForm extends React.Component {
                   })}
                   disabled={!searchCourseQuery}
                 >
-                  <option value="">{searchCourseQuery ? 'All Dates' : 'Choose a course'}</option>
+                  <option value="">{
+                    searchCourseQuery ?
+                      intl.formatMessage(messages['admin.searchForm.filter.startDate.options.allDates']) :
+                      intl.formatMessage(messages['admin.searchForm.filter.startDate.options.course'])
+                  }</option>
                   {searchCourseQuery && courseDates.map(date => (
                     <option
                       value={date}
@@ -108,9 +118,11 @@ class AdminSearchForm extends React.Component {
               </Form.Group>
             </div>
             <div className="col-12 col-md-6 my-2 my-md-0 px-0 px-md-2 px-lg-3">
-              <Form.Label id="search-email-label" className="mb-2">Filter by email</Form.Label>
+              <Form.Label id="search-email-label" className="mb-2">
+                {intl.formatMessage(messages['admin.searchForm.filter.email'])}
+              </Form.Label>
               <SearchBar
-                placeholder="Search by email..."
+                placeholder={intl.formatMessage(messages['admin.searchForm.filter.email.search.placeholder'])}
                 onSearch={query => updateUrl({
                   search: query,
                   page: 1,
@@ -134,6 +146,7 @@ AdminSearchForm.defaultProps = {
 };
 
 AdminSearchForm.propTypes = {
+  intl: intlShape.isRequired,
   searchEnrollmentsList: PropTypes.func.isRequired,
   searchParams: PropTypes.shape({
     searchQuery: PropTypes.string,
@@ -143,4 +156,4 @@ AdminSearchForm.propTypes = {
   tableData: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
-export default AdminSearchForm;
+export default injectIntl(AdminSearchForm);

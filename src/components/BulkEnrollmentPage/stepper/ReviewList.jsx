@@ -5,22 +5,36 @@ import {
 } from '@edx/paragon';
 import ReviewItem from './ReviewItem';
 
+import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import messages from './BulkEnrollmentStepper.messages';
+
 export const MAX_ITEMS_DISPLAYED = 25;
 
-export const ShowHideButton = ({
-  isShowingAll, showAll, show25, numRows, subject, ...props
+export const ShowHideButton = injectIntl(({
+  isShowingAll, showAll, show25, numRows, subject, intl, ...props
 }) => {
   if (numRows < MAX_ITEMS_DISPLAYED) {
     return null;
   }
   if (!isShowingAll) {
-    return <Button variant="link" size="inline" onClick={showAll} {...props}>Show {numRows - 25} more {subject.plural}</Button>;
+    return <Button variant="link" size="inline" onClick={showAll} {...props}>
+      {intl.formatMessage(messages['bulk.stepper.review.list.button.show'], {
+        numRows: numRows - 25,
+        subject: subject.plural
+      })}
+    </Button>;
   }
 
-  return <Button variant="link" size="inline" onClick={show25} {...props}>Hide {numRows - 25} {subject.plural}</Button>;
-};
+  return <Button variant="link" size="inline" onClick={show25} {...props}>
+    {intl.formatMessage(messages['bulk.stepper.review.list.button.hide'], {
+      numRows: numRows - 25,
+      subject: subject.plural
+    })}
+  </Button>;
+});
 
 ShowHideButton.propTypes = {
+  intl: intlShape.isRequired,
   /* User-facing words for the thing being displayed */
   subject: PropTypes.shape({
     singular: PropTypes.string.isRequired,
@@ -34,7 +48,7 @@ ShowHideButton.propTypes = {
 };
 
 const ReviewList = ({
-  rows, accessor, dispatch, subject, returnToSelection,
+  rows, accessor, dispatch, subject, returnToSelection, intl
 }) => {
   const [isShowingAll, showAll, show25] = useToggle(false);
   const displayRows = useMemo(() => {
@@ -51,14 +65,18 @@ const ReviewList = ({
       <ul className="be-review-list">
         {rows.length < 1 && (
           <Alert variant="danger" data-testid="no-rows-alert">
-            At least one {subject.singular} must be selected to enroll learners
+            {intl.formatMessage(messages['bulk.stepper.review.alert.body'], {
+              subject: subject.singular,
+            })}
             <Button
               data-testid="return-to-selection-button"
               variant="link"
               size="inline"
               onClick={returnToSelection}
             >
-              Return to {subject.singular} selection
+              {intl.formatMessage(messages['bulk.stepper.review.alert.button'], {
+                subject: subject.singular,
+              })}
             </Button>
           </Alert>
         )}
@@ -77,6 +95,7 @@ const ReviewList = ({
 };
 
 ReviewList.propTypes = {
+  intl: intlShape.isRequired,
   /* Selected rows from a DataTable instance */
   rows: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   /* The accessor for the text that will be displayed for this row. Should be on the object row.values */
@@ -93,4 +112,4 @@ ReviewList.propTypes = {
   returnToSelection: PropTypes.func.isRequired,
 };
 
-export default ReviewList;
+export default injectIntl(ReviewList);

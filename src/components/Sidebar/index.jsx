@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -56,55 +57,55 @@ class Sidebar extends React.Component {
 
     return [
       {
-        title: 'Learner Progress Report',
+        title: 'Отчет о ходе обучения',
         to: `${baseUrl}/admin/learners`,
         icon: faChartLine,
       },
       {
-        title: 'Code Management',
+        title: 'Управление кодами',
         to: `${baseUrl}/admin/coupons`,
         icon: faTags,
         hidden: !features.CODE_MANAGEMENT || !enableCodeManagementScreen,
       },
       {
-        title: 'Reporting Configurations',
+        title: 'Конфигурации отчетов',
         to: `${baseUrl}/admin/reporting`,
         icon: faFile,
         hidden: !features.REPORTING_CONFIGURATIONS || !enableReportingConfigScreen,
       },
       {
-        title: 'Subscription Management',
+        title: 'Управление подпиской',
         to: `${baseUrl}/admin/subscriptions`,
         icon: faCreditCard,
         hidden: !enableSubscriptionManagementScreen,
       },
       {
-        title: 'Subscription Enrollment',
+        title: 'Оформление подписки',
         to: `${baseUrl}/admin/${ROUTE_NAMES.bulkEnrollment}`,
         icon: faBookOpen,
         hidden: !(features.BULK_ENROLLMENT && enableSubscriptionManagementScreen),
       },
       {
-        title: 'Analytics',
+        title: 'Аналитика',
         to: `${baseUrl}/admin/analytics`,
         icon: faChartBar,
         hidden: !features.ANALYTICS || !enableAnalyticsScreen,
       },
       {
-        title: 'SAML Configuration',
+        title: 'Конфигурация SAML',
         to: `${baseUrl}/admin/samlconfiguration`,
         icon: faIdCard,
         hidden: !features.SAML_CONFIGURATION || !enableSamlConfigurationScreen,
       },
       {
-        title: 'LMS Integration Configuration',
+        title: 'Конфигурация интеграции с LMS',
         to: `${baseUrl}/admin/lmsintegrations`,
         icon: faUniversity,
         hidden: !features.EXTERNAL_LMS_CONFIGURATION || !enableLmsConfigurationsScreen,
       },
       // NOTE: keep "Support" link the last nav item
       {
-        title: 'Support',
+        title: 'Поддержка',
         to: configuration.ENTERPRISE_SUPPORT_URL,
         icon: faLifeRing,
         hidden: !features.SUPPORT,

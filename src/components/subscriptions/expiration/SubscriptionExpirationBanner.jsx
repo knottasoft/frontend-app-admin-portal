@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, { useContext } from 'react';
 import { MailtoLink } from '@edx/paragon';
 
@@ -16,16 +17,16 @@ const SubscriptionExpirationBanner = () => {
     <>
       {hasMultipleSubscriptions && daysUntilExpiration <= 0 ? (
         <>
-          This subscription cohort has expired. You may still view the statuses of learners who participated.
+          Срок действия этой когорты подписчиков истек. Вы все еще можете просматривать статусы обучающихся, которые участвовали в программе.
         </>
       ) : (
         <>
-          Your subscription is {daysUntilExpiration} days from expiration.
-          Contact the edX Customer Success team at
+          До истечения срока действия вашей подписки осталось {daysUntilExpiration} дней.
+          Свяжитесь с командой ЦОПП СК по адресу
           {' '}
-          <MailtoLink to="customersuccess@edx.org">customersuccess@edx.org</MailtoLink>
+          <MailtoLink to="customersuccess@edx.org">support@copp26.ru</MailtoLink>
           {' '}
-          to extend your contract.
+          для продления контракта.
         </>
       )}
     </>

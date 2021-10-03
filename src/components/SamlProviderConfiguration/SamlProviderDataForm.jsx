@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
@@ -82,7 +83,7 @@ class SamlProviderDataForm extends React.Component {
           <StatusAlert
             alertType="danger"
             iconClassName="fa fa-times-circle"
-            title="Unable to submit Data form:"
+            title="Не удается отправить форму данных:"
             message={error}
           />
         </div>
@@ -101,11 +102,11 @@ class SamlProviderDataForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="entityId"
-              helpText="The Entity ID of a provider is typically a url and would be provided by the SAMLProvider. Example: https://idp.testshib.org/idp/shibboleth"
+              helpText="Идентификатор сущности провайдера обычно представляет собой url и предоставляется SAMLProvider. Пример: https://idp.testshib.org/idp/shibboleth"
               invalid={invalidFields.entityId}
-              invalidMessage="Entity ID is required."
+              invalidMessage="Требуется идентификатор сущности."
             >
-              <label htmlFor="entityId">Entity ID<span className="required">*</span></label>
+              <label htmlFor="entityId">Идентификатор сущности.<span className="required">*</span></label>
               <Input
                 type="text"
                 id="entityId"
@@ -121,11 +122,11 @@ class SamlProviderDataForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="ssoUrl"
-              helpText="The SSO (Single Sign On) URL of the provider. Example: https://samltest.id/idp/profile/SAML2/Redirect/SSO"
+              helpText="URL-адрес SSO (Single Sign On) провайдера. Пример: https://samltest.id/idp/profile/SAML2/Redirect/SSO"
               invalid={invalidFields.ssoUrl}
-              invalidMessage="SSO URL required."
+              invalidMessage="Требуется URL-адрес SSO."
             >
-              <label htmlFor="ssoUrl">SSO URL<span className="required">*</span></label>
+              <label htmlFor="ssoUrl">URL-АДРЕС SSO<span className="required">*</span></label>
               <Input
                 type="text"
                 id="ssoUrl"
@@ -141,11 +142,11 @@ class SamlProviderDataForm extends React.Component {
           <div className="col col-4">
             <ValidationFormGroup
               for="publicKey"
-              helpText="The public key (May also be known as Signing Certificate) of your provider."
+              helpText="Публичный ключ (может также называться сертификатом подписи) вашего провайдера."
               invalid={invalidFields.publicKey}
-              invalidMessage="Public Key is required."
+              invalidMessage="Требуется Публичный ключ."
             >
-              <label htmlFor="publicKey">Public Key<span className="required">*</span></label>
+              <label htmlFor="publicKey">Публичный ключ<span className="required">*</span></label>
               <Input
                 type="textarea"
                 id="publicKey"
@@ -165,10 +166,10 @@ class SamlProviderDataForm extends React.Component {
                 type="submit"
                 id="submitButton"
                 labels={{
-                  default: 'Submit',
-                  pending: 'Saving...',
-                  complete: 'Complete',
-                  error: 'Error',
+                  default: 'Отправить',
+                  pending: 'Сохранение...',
+                  complete: 'Завершено',
+                  error: 'Ошибка',
                 }}
                 icons={{
                   default: <Icon className="fa fa-download" />,
@@ -188,7 +189,7 @@ class SamlProviderDataForm extends React.Component {
                 className="btn-outline-danger  mr-3"
                 onClick={() => this.handleDelete(pData.id)}
               >
-                <Icon className="fa fa-times danger" /> Delete
+                <Icon className="fa fa-times danger" /> Удалить
               </Button>
             </div>
           )}

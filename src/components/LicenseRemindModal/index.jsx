@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
@@ -110,14 +111,14 @@ class LicenseRemindModal extends React.Component {
               id="email-template-greeting"
               name="email-template-greeting"
               component={TextAreaAutoSize}
-              label="Customize Greeting"
+              label="Настроить приветствие"
               data-hj-suppress
             />
             <Field
               id="email-template-body"
               name="email-template-body"
               component={TextAreaAutoSize}
-              label="Body"
+              label="Содержание"
               disabled
               data-hj-suppress
             />
@@ -125,7 +126,7 @@ class LicenseRemindModal extends React.Component {
               id="email-template-closing"
               name="email-template-closing"
               component={TextAreaAutoSize}
-              label="Customize Closing"
+              label="Настроить завершение"
               data-hj-suppress
             />
           </div>
@@ -145,7 +146,7 @@ class LicenseRemindModal extends React.Component {
         <StatusAlert
           alertType="danger"
           iconClassName="fa fa-times-circle"
-          title="Unable to send reminder email"
+          title="Не удается отправить письмо с напоминанием"
           message={error.length > 1 ? (
             <ul className="m-0 pl-4">
               {error.map(message => <li key={message}>{message}</li>)}
@@ -184,11 +185,11 @@ class LicenseRemindModal extends React.Component {
             >
               <>
                 {submitting && <Icon className="fa fa-spinner fa-spin mr-2" />}
-                Send Reminder
+                Отправить напоминание
               </>
             </Button>,
           ]}
-          closeText="Cancel"
+          closeText="Отменить"
           onClose={onClose}
           open
         />

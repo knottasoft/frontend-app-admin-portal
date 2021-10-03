@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
@@ -50,7 +51,7 @@ const UserActivationPage = ({ match }) => {
   // user data is hydrated with a verified email address, so redirect the user
   // to the default page in the Admin Portal.
   if (isActive) {
-    addToast('Your edX administrator account was successfully activated.');
+    addToast('Ваша учетная запись администратора была успешно активирована.');
     return <Redirect to={`/${enterpriseSlug}/admin/learners`} />;
   }
 
@@ -63,15 +64,14 @@ const UserActivationPage = ({ match }) => {
         <Col xs lg={8} offset={1}>
           <Alert variant="warning">
             <p>
-              In order to continue, you must verify your email address to activate
-              your edX account. Please stay on this page as it will automatically refresh
-              once your account is activated.
+              Чтобы продолжить, вы должны подтвердить свой адрес электронной почты для активации
+              вашей учетной записи. Пожалуйста, оставайтесь на этой странице, так как она будет автоматически обновляться
+              как только ваша учетная запись будет активирована.
             </p>
             <p className="mb-0">
-              If you run into further issues, please contact the edX Customer
-              Success team at{' '}
-              <MailtoLink className="alert-link" to="customersuccess@edx.org">
-                customersuccess@edx.org
+              Если у вас возникнут дополнительные проблемы, пожалуйста, свяжитесь с командой ЦОПП СК по адресу{' '}
+              <MailtoLink className="alert-link" to="support@copp26.ru">
+                support@copp26.ru
               </MailtoLink>.
             </p>
           </Alert>

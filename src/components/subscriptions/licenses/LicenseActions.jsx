@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React, { useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
@@ -38,12 +39,12 @@ const LicenseAction = ({ user }) => {
 
           return [{
             key: 'revoke-btn',
-            text: 'Revoke',
+            text: 'Отозвать',
             handleClick: closeModal => (
               <LicenseRevokeModal
                 user={user}
                 onSuccess={() => {
-                  addToast('License successfully revoked');
+                  addToast('Лицензия успешно отозвана');
                   setActiveTab(TAB_REVOKED_USERS);
                   forceRefresh();
                 }}
@@ -56,15 +57,15 @@ const LicenseAction = ({ user }) => {
         case ASSIGNED:
           return [{
             key: 'remind-btn',
-            text: 'Remind',
+            text: 'Напомнить',
             handleClick: closeModal => (
               <LicenseRemindModal
                 user={user}
                 isBulkRemind={false}
-                title="Remind User"
+                title="Напомнить пользователю"
                 subscriptionUUID={subscription.uuid}
                 onSuccess={() => {
-                  addToast('Reminder successfully sent');
+                  addToast('Напоминание успешно отправлено');
                   forceRefresh();
                 }}
                 onClose={() => closeModal()}
@@ -72,12 +73,12 @@ const LicenseAction = ({ user }) => {
             ),
           }, {
             key: 'revoke-btn',
-            text: 'Revoke',
+            text: 'Отозвать',
             handleClick: closeModal => (
               <LicenseRevokeModal
                 user={user}
                 onSuccess={() => {
-                  addToast('License successfully revoked');
+                  addToast('Лицензия успешно отозвана');
                   setActiveTab(TAB_REVOKED_USERS);
                   forceRefresh();
                 }}

@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
@@ -20,8 +21,8 @@ import EmailTemplateForm from '../EmailTemplateForm';
 import CheckboxWithTooltip from '../ReduxFormCheckbox/CheckboxWithTooltip';
 
 const ERROR_MESSAGE_TITLES = {
-  [MODAL_TYPES.revoke]: 'Unable to revoke code(s)',
-  [MODAL_TYPES.save]: 'Unable to save template',
+  [MODAL_TYPES.revoke]: 'Не удаётся отозвать код(ы)',
+  [MODAL_TYPES.save]: 'Не удаётся сохранить шаблон',
 };
 
 class CodeRevokeModal extends React.Component {
@@ -122,7 +123,7 @@ class CodeRevokeModal extends React.Component {
 
     if (isBulkRevoke) {
       if (!data.selectedCodes.length) {
-        errors._error.push('At least one code must be selected.');
+        errors._error.push('Должен быть выбран хотя бы один код.');
         throw new SubmissionError(errors);
       }
 
@@ -190,12 +191,12 @@ class CodeRevokeModal extends React.Component {
             name="do-not-email"
             className="do-not-email-wrapper"
             component={CheckboxWithTooltip}
-            label="Do not email"
+            label="Не отправлять по электронной почте"
             checked={doNotEmail}
             id="doNotEmailCheckbox"
             icon={faInfoCircle}
-            altText="More information"
-            tooltipText="By clicking this box, you can revoke this coupon code without emailing the learner."
+            altText="Дополнительная информация"
+            tooltipText="Нажав на это поле, вы можете отозвать этот код купона, не отправляя его по электронной почте."
             onChange={(event, newValue) => {
               this.setDoNotEmail(newValue);
             }}
@@ -236,7 +237,7 @@ class CodeRevokeModal extends React.Component {
             >
               <>
                 {mode === MODAL_TYPES.revoke && submitting && <Icon className="fa fa-spinner fa-spin mr-2" />}
-                Revoke
+                Отозвать
               </>
             </Button>,
             <SaveTemplateButton
@@ -247,6 +248,7 @@ class CodeRevokeModal extends React.Component {
               disabled={doNotEmail}
             />,
           ]}
+          closeText="Отменить"
           onClose={onClose}
           open
         />

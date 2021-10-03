@@ -8,20 +8,19 @@ import AddLearnersStep from './AddLearnersStep';
 import ReviewStep from './ReviewStep';
 import {
   PREV_BUTTON_TEST_ID,
-  NEXT_BUTTON_TEXT,
-  PREVIOUS_BUTTON_TEXT,
   NEXT_BUTTON_TEST_ID,
   ADD_LEARNERS_STEP,
   REVIEW_STEP,
   ADD_COURSES_STEP,
-  ADD_COURSES_TITLE,
-  ADD_LEARNERS_TITLE,
-  REVIEW_TITLE,
 } from './constants';
 import { BulkEnrollContext } from '../BulkEnrollmentContext';
 import BulkEnrollmentSubmit from './BulkEnrollmentSubmit';
 
-const BulkEnrollmentStepper = ({ subscription, enterpriseSlug, enterpriseId }) => {
+import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import messages from './BulkEnrollmentStepper.messages';
+
+const BulkEnrollmentStepper = ({ subscription, enterpriseSlug, enterpriseId, intl }) => {
+
   const steps = [ADD_COURSES_STEP, ADD_LEARNERS_STEP, REVIEW_STEP];
   const [currentStep, setCurrentStep] = useState(steps[0]);
   const { emails: [selectedEmails], courses: [selectedCourses] } = useContext(BulkEnrollContext);
@@ -31,7 +30,7 @@ const BulkEnrollmentStepper = ({ subscription, enterpriseSlug, enterpriseId }) =
       <Stepper.Header className="my-3" />
       <div className="sticky-footer-wrapper">
         <Container size="xl" className="stepper-step">
-          <Stepper.Step eventKey={ADD_COURSES_STEP} title={ADD_COURSES_TITLE}>
+          <Stepper.Step eventKey={ADD_COURSES_STEP} title={intl.formatMessage(messages['bulk.stepper.add-courses.title'])}>
             <AddCoursesStep
               enterpriseId={enterpriseId}
               enterpriseSlug={enterpriseSlug}
@@ -39,14 +38,14 @@ const BulkEnrollmentStepper = ({ subscription, enterpriseSlug, enterpriseId }) =
             />
           </Stepper.Step>
 
-          <Stepper.Step eventKey={ADD_LEARNERS_STEP} title={ADD_LEARNERS_TITLE}>
+          <Stepper.Step eventKey={ADD_LEARNERS_STEP} title={intl.formatMessage(messages['bulk.stepper.add-learners.title'])}>
             <AddLearnersStep
               subscriptionUUID={subscription.uuid}
               enterpriseSlug={enterpriseSlug}
             />
           </Stepper.Step>
 
-          <Stepper.Step eventKey={REVIEW_STEP} title={REVIEW_TITLE}>
+          <Stepper.Step eventKey={REVIEW_STEP} title={intl.formatMessage(messages['bulk.stepper.review.title'])}>
             <ReviewStep setCurrentStep={setCurrentStep} />
           </Stepper.Step>
         </Container>
@@ -58,7 +57,7 @@ const BulkEnrollmentStepper = ({ subscription, enterpriseSlug, enterpriseId }) =
               data-testid={NEXT_BUTTON_TEST_ID}
               disabled={selectedCourses.length < 1}
             >
-              {NEXT_BUTTON_TEXT}
+              {intl.formatMessage(messages['bulk.stepper.button.next'])}
             </Button>
           </Stepper.ActionRow>
           <Stepper.ActionRow eventKey={ADD_LEARNERS_STEP}>
@@ -67,7 +66,7 @@ const BulkEnrollmentStepper = ({ subscription, enterpriseSlug, enterpriseId }) =
               onClick={() => setCurrentStep(ADD_COURSES_STEP)}
               data-testid={PREV_BUTTON_TEST_ID}
             >
-              {PREVIOUS_BUTTON_TEXT}
+              {intl.formatMessage(messages['bulk.stepper.button.previous'])}
             </Button>
             <Stepper.ActionRow.Spacer />
             <Button
@@ -75,7 +74,7 @@ const BulkEnrollmentStepper = ({ subscription, enterpriseSlug, enterpriseId }) =
               data-testid={NEXT_BUTTON_TEST_ID}
               disabled={selectedEmails.length < 1}
             >
-              {NEXT_BUTTON_TEXT}
+              {intl.formatMessage(messages['bulk.stepper.button.next'])}
             </Button>
           </Stepper.ActionRow>
 
@@ -85,7 +84,7 @@ const BulkEnrollmentStepper = ({ subscription, enterpriseSlug, enterpriseId }) =
               onClick={() => setCurrentStep(ADD_LEARNERS_STEP)}
               data-testid={PREV_BUTTON_TEST_ID}
             >
-              {PREVIOUS_BUTTON_TEXT}
+              {intl.formatMessage(messages['bulk.stepper.button.previous'])}
             </Button>
             <Stepper.ActionRow.Spacer />
             <BulkEnrollmentSubmit
@@ -101,6 +100,7 @@ const BulkEnrollmentStepper = ({ subscription, enterpriseSlug, enterpriseId }) =
 };
 
 BulkEnrollmentStepper.propTypes = {
+  intl: intlShape.isRequired,
   enterpriseId: PropTypes.string.isRequired,
   enterpriseSlug: PropTypes.string.isRequired,
   subscription: PropTypes.shape({
@@ -108,4 +108,4 @@ BulkEnrollmentStepper.propTypes = {
   }).isRequired,
 };
 
-export default BulkEnrollmentStepper;
+export default injectIntl(BulkEnrollmentStepper);

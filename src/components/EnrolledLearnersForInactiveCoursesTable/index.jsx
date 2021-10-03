@@ -1,3 +1,4 @@
+// TODO: Lang support
 import React from 'react';
 
 import TableContainer from '../../containers/TableContainer';
@@ -7,22 +8,22 @@ import EnterpriseDataApiService from '../../data/services/EnterpriseDataApiServi
 const EnrolledLearnersForInactiveCoursesTable = () => {
   const tableColumns = [
     {
-      label: 'Email',
+      label: 'Электронная почта',
       key: 'user_email',
       columnSortable: true,
     },
     {
-      label: 'Total Course Enrollment Count',
+      label: 'Всего зачислено на курс',
       key: 'enrollment_count',
       columnSortable: true,
     },
     {
-      label: 'Total Completed Courses Count',
+      label: 'Всего пройденных курсов',
       key: 'course_completion_count',
       columnSortable: true,
     },
     {
-      label: 'Last Activity Date',
+      label: 'Дата последней активности',
       key: 'last_activity_date',
       columnSortable: true,
     },
