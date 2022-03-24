@@ -16,7 +16,7 @@ import NotFoundPage from '../NotFoundPage';
 import ErrorPage from '../ErrorPage';
 import LoadingMessage from '../LoadingMessage';
 import { SubscriptionManagementPage } from '../subscriptions';
-import { AnalyticsPage } from '../analytics';
+// import { AnalyticsPage } from '../analytics';
 import { removeTrailingSlash } from '../../utils';
 import { features } from '../../config';
 import LmsConfigurations from '../../containers/LmsConfigurations';
@@ -203,18 +203,18 @@ class EnterpriseApp extends React.Component {
                       render={routeProps => <SubscriptionManagementPage {...routeProps} />}
                     />
                   )}
-                  {features.ANALYTICS && enableAnalyticsScreen && (
-                    <Route
-                      key="analytics"
-                      exact
-                      path={`${baseUrl}/admin/analytics`}
-                      render={routeProps => (
-                        <AnalyticsPage
-                          {...routeProps}
-                        />
-                      )}
-                    />
-                  )}
+//                   {features.ANALYTICS && enableAnalyticsScreen && (
+//                     <Route
+//                       key="analytics"
+//                       exact
+//                       path={`${baseUrl}/admin/analytics`}
+//                       render={routeProps => (
+//                         <AnalyticsPage
+//                           {...routeProps}
+//                         />
+//                       )}
+//                     />
+//                   )}
                   {features.SAML_CONFIGURATION && enableSamlConfigurationScreen && (
                     <Route
                       key="saml-configuration"
