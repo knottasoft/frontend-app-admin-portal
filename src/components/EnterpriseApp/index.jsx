@@ -16,7 +16,6 @@ import NotFoundPage from '../NotFoundPage';
 import ErrorPage from '../ErrorPage';
 import LoadingMessage from '../LoadingMessage';
 import { SubscriptionManagementPage } from '../subscriptions';
-// import { AnalyticsPage } from '../analytics';
 import { removeTrailingSlash } from '../../utils';
 import { features } from '../../config';
 import LmsConfigurations from '../../containers/LmsConfigurations';
