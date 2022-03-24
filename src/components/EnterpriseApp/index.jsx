@@ -203,18 +203,6 @@ class EnterpriseApp extends React.Component {
                       render={routeProps => <SubscriptionManagementPage {...routeProps} />}
                     />
                   )}
-//                   {features.ANALYTICS && enableAnalyticsScreen && (
-//                     <Route
-//                       key="analytics"
-//                       exact
-//                       path={`${baseUrl}/admin/analytics`}
-//                       render={routeProps => (
-//                         <AnalyticsPage
-//                           {...routeProps}
-//                         />
-//                       )}
-//                     />
-//                   )}
                   {features.SAML_CONFIGURATION && enableSamlConfigurationScreen && (
                     <Route
                       key="saml-configuration"
